@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour {
 
 	public static GameManager singleton;
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour {
 		SingletonThis();
 	}
 
-	private void Restart() {
+	public void Restart() {
 		// Fade out.
 		blackScreen.SetActive (false);
 		gameOverPanel.SetActive (false);
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour {
 		roomMgr.MoveToRoom (-1);
 	}
 
-	private void GameOver() {
+	public void GameOver() {
 		// Fade In
 		blackScreen.SetActive (true);
 		gameOverPanel.SetActive (true);
