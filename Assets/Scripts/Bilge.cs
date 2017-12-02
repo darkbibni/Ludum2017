@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cale : MonoBehaviour {
+public class Bilge : MonoBehaviour {
 
 	public BoatManager boat;
 
-	private int nbHole;
+	private int nbHole=0;
 
 
 	// Use this for initialization
@@ -20,9 +20,9 @@ public class Cale : MonoBehaviour {
 	}
 
 	void IncreaseSubmersion() {
-		if (nbHole == 0)
-			return;
+		//if (nbHole == 0)
+		//	return;
 		
-		boat.Submersion =+ nbHole * 0.01;
+		boat.Submersion += nbHole * 0.01f;
 	}
 }
