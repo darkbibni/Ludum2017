@@ -8,6 +8,13 @@ public class Bilge : Room {
 
 	private int nbHole=0;
 
+	public int NbHole {
+		get { return nbHole; }
+		set {
+			nbHole = value;
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
 		InvokeRepeating ("IncreaseSubmersion", 0.0f, 1.0f);
@@ -21,7 +28,15 @@ public class Bilge : Room {
 	void IncreaseSubmersion() {
 		//if (nbHole == 0)
 		//	return;
-		
-		boat.Submersion += nbHole * 0.01f;
+
+		boat.Submersion += /*nbHole * */ 0.01f;
+	}
+
+	public void SetupBilge() {
+		nbHole = 0;
+	}
+
+	public void StopBilge() {
+		CancelInvoke ("IncreaseSubmersion");
 	}
 }

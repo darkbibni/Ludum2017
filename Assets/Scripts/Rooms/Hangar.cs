@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hangar : MonoBehaviour {
+public class Hangar : Room {
 
 	public BoatManager boat;
 	public Generator generator;
@@ -32,6 +32,15 @@ public class Hangar : MonoBehaviour {
 	}
 
 	void IncreaseElectricityRequest() {
-		boat.ElecricityResquest = boat.ElecricityResquest+ 0.2f;
+		boat.ElectricityRequest = boat.ElectricityRequest + 0.2f;
 	}
+
+	public void SetupHangar() {
+		loadedBattery=0;
+	}
+
+	public void StopHangar() {
+	}
+
+
 }
