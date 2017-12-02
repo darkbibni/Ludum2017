@@ -19,7 +19,11 @@ public class Interactable : MonoBehaviour {
 		SendMessage ("OnMouseDrag", SendMessageOptions.DontRequireReceiver);
 	}
 
-	public void MouseReleased() {
-		SendMessage ("OnMouseReleased", SendMessageOptions.DontRequireReceiver);
+	/// <summary>
+	/// Send message on all components of this object when mouse is released.
+	/// </summary>
+	/// <param name="targetObject">Target object if exists</param>
+	public void MouseReleased(GameObject targetObject) {
+		SendMessage ("OnMouseReleased", targetObject, SendMessageOptions.DontRequireReceiver);
 	}
 }

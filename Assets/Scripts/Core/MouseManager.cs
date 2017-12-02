@@ -6,6 +6,10 @@ public class MouseManager : MonoBehaviour {
 
 	public Camera cam;
 
+	public LayerMask allObjectsLayer;
+	public LayerMask interactableLayer;
+	public LayerMask targetableLayer;
+
 	private GameObject currentGameObject;
 	private Interactable interactable;
 
@@ -18,22 +22,19 @@ public class MouseManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-
-
+		
 		if (Input.GetMouseButtonDown (0)) {
 			
-			currentGameObject = GetGameObjectUnderMouse ();
+			currentGameObject = GetObject (allObjectsLayer);
 
 			// Store interactable if gameobject exist.
 			if (currentGameObject) {
 				interactable = currentGameObject.GetComponent<Interactable> ();
+
 				if (interactable) {
 					if (interactable.interactionType == InteractionType.CLICKABLE) {
 						interactable.MousePressed ();
-					}
-
-					else if(interactable.interactionType == InteractionType.DRAGABLE) {
+					} else if (interactable.interactionType == InteractionType.DRAGABLE) {
 						mousePressed = true;
 
 						Debug.Log ("Start drag");
@@ -52,7 +53,11 @@ public class MouseManager : MonoBehaviour {
 
 						mousePressed = false;
 
-						interactable.MouseReleased ();
+						GameObject targetableObject = GetObject (targetableLayer);
+
+						interactable.MouseReleased (targetableObject);
+
+						Debug.Log ("Drop object on " + targetableObject);
 					}
 				}
 			}
@@ -82,25 +87,16 @@ public class MouseManager : MonoBehaviour {
 				}
 			}
 		}
-
-		/*
-		if (Input.mousePosition > 0 ) {
-			mousePressed = false;
-
-			currentGameObject = null;
-			interactable = null;
-		}
-		*/
 	}
 
-	GameObject GetGameObjectUnderMouse() {
+	GameObject GetObject(LayerMask layerMask) {
 		Ray ray = cam.ScreenPointToRay (Input.mousePosition);
 
-		RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction);
-
-		Debug.DrawRay (ray.origin, ray.direction, Color.green);
+		RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 100.0f, layerMask);
 
 		if(hit) {
+			Debug.DrawRay (ray.origin, ray.direction * hit.distance, Color.red, 0.5f);
+
 			return hit.transform.gameObject;
 		}
 

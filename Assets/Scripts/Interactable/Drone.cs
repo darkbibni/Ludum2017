@@ -24,6 +24,4 @@ public class Drone : MonoBehaviour {
 			transform.Translate (new Vector2 (0.0f, Time.deltaTime * speed));
 		}
 	}
-
-
 }
