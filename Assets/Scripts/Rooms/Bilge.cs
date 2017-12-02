@@ -17,6 +17,8 @@ public class Bilge : Room {
 		initialWaterHeight = water.transform.localPosition;
 
 		InvokeRepeating ("IncreaseSubmersion", 0.0f, 1.0f);
+
+		nbHole = 1;
 	}
 
 	// Update is called once per frame

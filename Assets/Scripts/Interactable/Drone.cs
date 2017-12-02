@@ -9,4 +9,6 @@ public class Drone : MonoBehaviour {
 	void OnMousePressed() {
 		Debug.Log ("Send drone");
 	}
+
+
 }

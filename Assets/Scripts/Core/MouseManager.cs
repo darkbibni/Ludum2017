@@ -7,6 +7,7 @@ public class MouseManager : MonoBehaviour {
 	public Camera cam;
 
 	private GameObject currentGameObject;
+	private Interactable interactable;
 
 	private bool mousePressed;
 
@@ -18,40 +19,76 @@ public class MouseManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetMouseButtonDown (0)) {
-			mousePressed = true;
 
+
+		if (Input.GetMouseButtonDown (0)) {
+			
 			currentGameObject = GetGameObjectUnderMouse ();
 
+			// Store interactable if gameobject exist.
 			if (currentGameObject) {
-				Interactable interactable = currentGameObject.GetComponent<Interactable> ();
+				interactable = currentGameObject.GetComponent<Interactable> ();
 				if (interactable) {
-					interactable.MousePressed ();
+					if (interactable.interactionType == InteractionType.CLICKABLE) {
+						interactable.MousePressed ();
+					}
+
+					else if(interactable.interactionType == InteractionType.DRAGABLE) {
+						mousePressed = true;
+
+						Debug.Log ("Start drag");
+					}
+				}
+			}
+		}
+
+		// Release !
+		if (Input.GetMouseButtonUp (0)) {
+			if (mousePressed) {
+				if (interactable) {
+
+					if (interactable.interactionType == InteractionType.DRAGABLE) {
+						Debug.Log ("End drag");
+
+						mousePressed = false;
+
+						interactable.MouseReleased ();
+					}
+				}
+			}
+		}
+
+		// Drag !
+		if (mousePressed && currentGameObject != null) {
+
+			float mouseX = Input.mousePosition.x;
+			float mouseY = Input.mousePosition.y;
+			float screenWidth = Screen.width;
+			float screenHeight = Screen.height;
+
+			// Out of screen.
+			if (mouseX < 0 || mouseX > 725 || mouseY < 0 || mouseY > screenHeight) {
+				
+			} else {
+				Vector3 newPos = cam.ScreenToWorldPoint(Input.mousePosition);
+				newPos.z = 0.0f;
+
+				currentGameObject.transform.position = newPos;
+
+				if (interactable) {
+					if (interactable.interactionType == InteractionType.DRAGABLE) {
+						interactable.MouseDrag ();
+					}
 				}
 			}
 		}
 
 		/*
-		// No drag interaction.
-		if (currentGameObject != null) {
-			if (Input.GetMouseButtonUp (0)) {
-				mousePressed = false;
-				Debug.Log ("Click on " + currentGameObject);
-				currentGameObject = null;
-			}
-		}
+		if (Input.mousePosition > 0 ) {
+			mousePressed = false;
 
-		else {
-			Debug.Log ("move hover");
-
-			if (newObj) {
-				currentGameObject = newObj;
-
-				if (Input.GetMouseButtonDown (0)) {
-					mousePressed = true;
-					Debug.Log ("Mouse down on an object");
-				}
-			}
+			currentGameObject = null;
+			interactable = null;
 		}
 		*/
 	}
