@@ -42,7 +42,9 @@ public class BoatManager : MonoBehaviour {
 	public int Score {
 		get { return score; }
 		set {
-			electricityValue.fillAmount = score;
+			score = value;
+
+			scoreValue.text = score.ToString();
 		}
 	}
 	private float submersion=0f;
@@ -65,7 +67,7 @@ public class BoatManager : MonoBehaviour {
 	}
 
 	void IncreaseScore(){
-		score += 10;
+		Score += 10;
 	}
 
 	void CheckSubmersionEvent() { // check value of submersion trigger event

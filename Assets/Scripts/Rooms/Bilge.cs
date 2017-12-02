@@ -21,7 +21,7 @@ public class Bilge : Room {
 	void IncreaseSubmersion() {
 		//if (nbHole == 0)
 		//	return;
-		
-		boat.Submersion += nbHole * 0.01f;
+
+		boat.Submersion += /*nbHole * */ 0.01f;
 	}
 }
