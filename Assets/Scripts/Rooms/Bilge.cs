@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bilge : MonoBehaviour {
+public class Bilge : Room {
 
 	public BoatManager boat;
 
 	private int nbHole=0;
-
 
 	// Use this for initialization
 	void Start () {
