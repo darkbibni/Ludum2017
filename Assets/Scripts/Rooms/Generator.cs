@@ -8,14 +8,13 @@ public class Generator : Room {
 
 	public int NbBattery{
 		get { return nbBattery; }
-		set { 					}
+		set { nbBattery = value; }
 	}
 
 	private bool isWaiting;
 	private float timeToWait=5f;
 	private int nbBattery=0;
 	private float generatorPower=0f;
-
 
 	// Use this for initialization
 	void Start () {
@@ -51,7 +50,16 @@ public class Generator : Room {
 		boat.Radioactivity = boat.Radioactivity - 0.2f; //EmptyTheBucket
 	}
 
+	public void SetupGenerator() {
+		timeToWait=5f;
+		nbBattery=0;
+		generatorPower=0f;
+	}
 
+	public void StopGenerator() {
+		CancelInvoke ("IncreaseRadioactivity");
+		StopAllCoroutines ();
+	}
 
 
 }

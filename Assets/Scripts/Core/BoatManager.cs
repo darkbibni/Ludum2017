@@ -10,6 +10,13 @@ public class BoatManager : MonoBehaviour {
 	public Image waterValue;
 	public Text scoreValue;
 
+	[Header("Intervalles")]
+	public float scoreInterval = 1.0f;
+	public float requestInterval = 1.0f;
+
+	public Generator generator;
+	public Bilge bilge;
+	public Hangar hangar;
 
 	public float Submersion {
 		get { return submersion; }
@@ -30,10 +37,10 @@ public class BoatManager : MonoBehaviour {
 		}
 	}
 
-	public float ElecricityResquest {
+	public float ElectricityRequest {
 		get { return electricityRequest; }
 		set {
-			electricityRequest = Mathf.Clamp (value, 0, 1);
+			electricityRequest = Mathf.Clamp (value, 0f, 1f);
 			electricityValue.fillAmount = electricityRequest;
 			CheckElectricityRequestEvent ();
 		}
@@ -53,12 +60,26 @@ public class BoatManager : MonoBehaviour {
 	private int score=0;
 
 	void Awake() {
+		SetupBoat ();
+	}
 
+	void SetupBoat() {
+
+		Radioactivity = 0.0f;
+		ElectricityRequest = 1.0f;
+		Submersion = 0.0f;
+		Score = 0;
+		bilge.SetupBilge ();
+		generator.SetupGenerator ();
+		hangar.SetupHangar ();
+
+		InvokeRepeating ("IncreaseScore", 0.0f, scoreInterval);
+		InvokeRepeating ("DeacreaseElectricityRequest", 0.0f, requestInterval);
 	}
 
 	// Use this for initialization
 	void Start () {
-		InvokeRepeating ("IncreaseScore", 0.0f, 1.0f);
+		
 	}
 	
 	// Update is called once per frame
@@ -72,23 +93,37 @@ public class BoatManager : MonoBehaviour {
 
 	void CheckSubmersionEvent() { // check value of submersion trigger event
 		if (submersion==1)
-			GameManager.singleton.GameOver();
+			StopBoat ();
 	}
 
 	void CheckRadioactivityEvent() { // check value of submersion trigger event
 		if (radioactivity==1)
-			GameManager.singleton.GameOver();
+			StopBoat ();
 	}
 
 	void CheckElectricityRequestEvent() { // check value of submersion trigger event
-		if (electricityRequest==0)
-			GameManager.singleton.GameOver();
+
+		if (electricityRequest <= 0f) {
+			StopBoat ();
+		}
+			
 		//if (electricityRequest==0.1)
 			//Call SendTheRafales
 	}
 
+	// Trigger when gameover.
+	void StopBoat() {
+
+		CancelInvoke ("DeacreaseElectricityRequest");
+		CancelInvoke ("IncreaseScore");
+		bilge.StopBilge ();
+		generator.StopGenerator ();
+		hangar.StopHangar ();
+		GameManager.singleton.GameOver();
+	}
+
 	void DeacreaseElectricityRequest() {
-		ElecricityResquest -= ElecricityResquest * 0.01f;
+		ElectricityRequest -= 0.01f;
 	}
 
 }
