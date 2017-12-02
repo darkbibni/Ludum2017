@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hangar : MonoBehaviour {
+public class Hangar : Room {
 
 	public BoatManager boat;
 	public Generator generator;
