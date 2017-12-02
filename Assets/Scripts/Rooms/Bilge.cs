@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +8,12 @@ public class Bilge : Room {
 
 	public GameObject water;
 
+  public int NbHole {
+		get { return nbHole; }
+		set {
+			nbHole = value;
+		}
+	}
 	private int nbHole=0;
 
 	private Vector3 initialWaterHeight;
@@ -18,6 +24,7 @@ public class Bilge : Room {
 
 		InvokeRepeating ("IncreaseSubmersion", 0.0f, 1.0f);
 
+    // for debug !
 		nbHole = 1;
 	}
 
@@ -39,5 +46,13 @@ public class Bilge : Room {
 		//	return;
 
 		boat.Submersion += nbHole * 0.01f;
+	}
+
+	public void SetupBilge() {
+		nbHole = 0;
+	}
+
+	public void StopBilge() {
+		CancelInvoke ("IncreaseSubmersion");
 	}
 }
