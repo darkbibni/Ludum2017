@@ -6,7 +6,12 @@ public class MouseManager : MonoBehaviour {
 
 	public Camera cam;
 
+	public LayerMask allObjectsLayer;
+	public LayerMask interactableLayer;
+	public LayerMask targetableLayer;
+
 	private GameObject currentGameObject;
+	private Interactable interactable;
 
 	private bool mousePressed;
 
@@ -17,53 +22,81 @@ public class MouseManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 		if (Input.GetMouseButtonDown (0)) {
-			mousePressed = true;
+			
+			currentGameObject = GetObject (allObjectsLayer);
 
-			currentGameObject = GetGameObjectUnderMouse ();
-
+			// Store interactable if gameobject exist.
 			if (currentGameObject) {
-				Interactable interactable = currentGameObject.GetComponent<Interactable> ();
+				interactable = currentGameObject.GetComponent<Interactable> ();
+
 				if (interactable) {
-					interactable.MousePressed ();
+					if (interactable.interactionType == InteractionType.CLICKABLE) {
+						interactable.MousePressed ();
+					} else if (interactable.interactionType == InteractionType.DRAGABLE) {
+						mousePressed = true;
+
+						Debug.Log ("Start drag");
+					}
 				}
 			}
 		}
 
-		/*
-		// No drag interaction.
-		if (currentGameObject != null) {
-			if (Input.GetMouseButtonUp (0)) {
-				mousePressed = false;
-				Debug.Log ("Click on " + currentGameObject);
-				currentGameObject = null;
-			}
-		}
+		// Release !
+		if (Input.GetMouseButtonUp (0)) {
+			if (mousePressed) {
+				if (interactable) {
 
-		else {
-			Debug.Log ("move hover");
+					if (interactable.interactionType == InteractionType.DRAGABLE) {
+						Debug.Log ("End drag");
 
-			if (newObj) {
-				currentGameObject = newObj;
+						mousePressed = false;
 
-				if (Input.GetMouseButtonDown (0)) {
-					mousePressed = true;
-					Debug.Log ("Mouse down on an object");
+						GameObject targetableObject = GetObject (targetableLayer);
+
+						interactable.MouseReleased (targetableObject);
+
+						Debug.Log ("Drop object on " + targetableObject);
+					}
 				}
 			}
 		}
-		*/
+
+		// Drag !
+		if (mousePressed && currentGameObject != null) {
+
+			float mouseX = Input.mousePosition.x;
+			float mouseY = Input.mousePosition.y;
+			float screenWidth = Screen.width;
+			float screenHeight = Screen.height;
+
+			// Out of screen.
+			if (mouseX < 0 || mouseX > 725 || mouseY < 0 || mouseY > screenHeight) {
+				
+			} else {
+				Vector3 newPos = cam.ScreenToWorldPoint(Input.mousePosition);
+				newPos.z = 0.0f;
+
+				currentGameObject.transform.position = newPos;
+
+				if (interactable) {
+					if (interactable.interactionType == InteractionType.DRAGABLE) {
+						interactable.MouseDrag ();
+					}
+				}
+			}
+		}
 	}
 
-	GameObject GetGameObjectUnderMouse() {
+	GameObject GetObject(LayerMask layerMask) {
 		Ray ray = cam.ScreenPointToRay (Input.mousePosition);
 
-		RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction);
-
-		Debug.DrawRay (ray.origin, ray.direction, Color.green);
+		RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, 100.0f, layerMask);
 
 		if(hit) {
+			Debug.DrawRay (ray.origin, ray.direction * hit.distance, Color.red, 0.5f);
+
 			return hit.transform.gameObject;
 		}
 
