@@ -41,6 +41,10 @@ public class Bilge : Room {
 		water.transform.localPosition = newPos;
 	}
 
+	public void EjectWater() {
+		boat.Submersion -= boat.Submersion * 0.25f;
+	}
+
 	void IncreaseSubmersion() {
 		//if (nbHole == 0)
 		//	return;

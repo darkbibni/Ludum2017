@@ -26,4 +26,8 @@ public class Interactable : MonoBehaviour {
 	public void MouseReleased(GameObject targetObject) {
 		SendMessage ("OnMouseReleased", targetObject, SendMessageOptions.DontRequireReceiver);
 	}
+
+	public void MouseReleased(Vector3 dropPosition) {
+		SendMessage ("OnMouseReleased", dropPosition, SendMessageOptions.DontRequireReceiver);
+	}
 }
