@@ -15,7 +15,7 @@ public class Hangar : Room {
 
 	// Use this for initialization
 	void Start () {
-		
+		spawnDrone ();
 	}
 	
 	// Update is called once per frame
@@ -31,7 +31,7 @@ public class Hangar : Room {
 
 	public void spawnDrone(){
 		GameObject droneSpawned = Instantiate (dronePrefab, posDrone.position, posDrone.rotation);
-		Drone d = droneSpawned.GetComponent<Drone> ();
+		d = droneSpawned.GetComponent<Drone> ();
 		d.hangar = this;
 		d.boat = boat;
 	}

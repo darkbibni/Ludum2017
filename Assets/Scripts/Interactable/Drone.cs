@@ -11,6 +11,7 @@ public class Drone : MonoBehaviour {
 
 	public AudioClip droneTakeover;
 	public AudioClip droneSupplyValidate;
+	public AudioClip sendError;
 
 	private int loadedBattery=0;
 
@@ -26,8 +27,13 @@ public class Drone : MonoBehaviour {
 	private bool move;
 
 	void OnMousePressed(int index) {
-		move = true;
-		AudioManager.singleton.PlaySfx (droneTakeover);
+
+		if (loadedBattery > 0) {
+			move = true;
+			AudioManager.singleton.PlaySfx (droneTakeover);
+		} else {
+			AudioManager.singleton.PlaySfx (sendError);
+		}
 	}
 
 	void Update() {
@@ -45,8 +51,7 @@ public class Drone : MonoBehaviour {
 	}
 
 	public void StopDrone() {
-		// Destroy (gameObject);
-		// TODO Debug that
+		Destroy (gameObject);
 	}
 
 	void ValidateDrone() {
