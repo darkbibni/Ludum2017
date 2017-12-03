@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public enum GameoverType {
+	OVERHEAT,
+	SINKING,
+	BOMBING
+}
+
 public class GameManager : MonoBehaviour {
 
 	public static GameManager singleton;
@@ -12,8 +18,18 @@ public class GameManager : MonoBehaviour {
 
 	public RoomManager roomMgr;
 
+	[Header("Audio components")]
+	private AudioManager audioMgr;
+	public AudioClip[] gameoverSfxs;
+
 	void Awake() {
 		SingletonThis();
+
+		audioMgr = AudioManager.singleton;
+	}
+
+	void Start() {
+		audioMgr.PlayBgm (audioMgr.bgmInGame);
 	}
 
 	public void Restart() {
@@ -24,8 +40,25 @@ public class GameManager : MonoBehaviour {
 		roomMgr.MoveToRoom (-1);
 	}
 
-	public void GameOver() {
+	public void GameOver(GameoverType gameoverType) {
 		// Fade In
+
+		AudioClip gameOverToPlay = null;
+
+		switch (gameoverType) {
+		case GameoverType.OVERHEAT:
+			gameOverToPlay = gameoverSfxs [0];
+				break;
+		case GameoverType.SINKING:
+			gameOverToPlay = gameoverSfxs[1];
+				break;
+		case GameoverType.BOMBING:
+			gameOverToPlay = gameoverSfxs [2];
+			break;
+		}
+
+		audioMgr.PlaySfx(gameOverToPlay);
+
 		blackScreen.SetActive (true);
 		gameOverPanel.SetActive (true);
 	}
@@ -43,7 +76,7 @@ public class GameManager : MonoBehaviour {
 
 	[ContextMenu("GameOver")]
 	public void SimulateGO() {
-		GameOver ();
+		GameOver (GameoverType.BOMBING);
 	}
 
 	[ContextMenu("Restart")]
