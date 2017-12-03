@@ -7,7 +7,11 @@ public class MoveWatch : MonoBehaviour {
 	private bool mousePressed;
 	private Vector3 mouseOrigin;
 
-	void Update() {
+	void OnMouseOver() {
+
+		Debug.Log ("Over");
+
+		/*
 		if (Input.GetMouseButtonDown (0)) {
 			mousePressed = true;
 
@@ -19,15 +23,15 @@ public class MoveWatch : MonoBehaviour {
 		}
 
 		if (mousePressed) {
+
 			if(mouseOrigin != Vector3.zero) {
 				Vector3 dir = (mouseOrigin - Input.mousePosition).normalized;
 
-				Debug.Log (dir.x);
+				Debug.Log (dir);
 			}
 		}
+		*/
 	}
 
-	void OnmouseStay() {
 
-	}
 }
