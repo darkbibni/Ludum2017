@@ -31,15 +31,19 @@ public class GameManager : MonoBehaviour {
 
 	void Start() {
 		audioMgr.PlayBgm (audioMgr.bgmInGame);
+
+		Setup ();
 	}
 
-	public void Restart() {
+	public void Setup() {
 		// Fade out.
 		blackScreen.SetActive (false);
 		gameOverPanel.SetActive (false);
 
 		boatMgr.SetupBoat ();
-		roomMgr.MoveToRoom (-1);
+
+		// Generator by default
+		roomMgr.MoveToRoom (2);
 	}
 
 	public void GameOver(GameoverType gameoverType) {
@@ -85,6 +89,6 @@ public class GameManager : MonoBehaviour {
 
 	[ContextMenu("Restart")]
 	public void SimulateRestart() {
-		Restart ();
+		Setup ();
 	}
 }

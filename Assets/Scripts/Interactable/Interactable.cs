@@ -11,8 +11,8 @@ public class Interactable : MonoBehaviour {
 
 	public InteractionType interactionType;
 
-	public void MousePressed() {
-		SendMessage ("OnMousePressed", SendMessageOptions.DontRequireReceiver);
+	public void MousePressed(int index) {
+		SendMessage ("OnMousePressed", index, SendMessageOptions.DontRequireReceiver);
 	}
 
 	public void MouseDrag() {

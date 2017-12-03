@@ -8,10 +8,12 @@ public class AudioManager : MonoBehaviour {
 
 	public AudioClip bgmTitle;
 	public AudioClip bgmInGame;
+	public AudioClip bgmInGameStressfull;
 
 	public AudioSource musicSrc;
 	public AudioSource soundSrc;
 	public AudioSource ambientSrc;
+	public AudioSource voiceSrc;
 
 	void Awake() {
 		SingletonThis();
@@ -33,6 +35,10 @@ public class AudioManager : MonoBehaviour {
 
 	public void PlaySfx(AudioClip sfx) {
 		soundSrc.PlayOneShot(sfx);
+	}
+
+	public void PlayVoice(AudioClip voice) {
+		voiceSrc.PlayOneShot (voice);
 	}
 
 

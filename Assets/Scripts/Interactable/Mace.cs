@@ -20,6 +20,8 @@ public class Mace : MonoBehaviour {
 		AudioManager.singleton.PlaySfx (massHit);
 		GameObject holeSpawned = Instantiate (holePrefab, dropPosition, Quaternion.identity);
 
+		bilge.AddHole (holeSpawned);
+
 		Hole h = holeSpawned.GetComponent<Hole> ();
 		h.bilge = bilge;
 		h.OnCreateHole ();

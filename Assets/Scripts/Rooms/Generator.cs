@@ -31,8 +31,6 @@ public class Generator : Room {
 	IEnumerator IncreaseNbBattery() {
 		isWaiting = true;
 
-		Debug.Log ("Spawn battery");
-
 		if ((nbBattery) < 5) {
 			nbBattery++;
 			hangar.spawnBattery();
@@ -63,15 +61,13 @@ public class Generator : Room {
 		boat.Radioactivity -= boat.Submersion*0.2f; //EmptyTheBucket
 	}
 
-	public void SetupGenerator() {
+	public override void Setup() {
 		timeToWait=5f;
 		nbBattery=0;
 		valve.NbTour=0;
 	}
 
-
-
-	public void StopGenerator() {
+	public override void Reset() {
 		CancelInvoke ("IncreaseRadioactivity");
 		StopAllCoroutines ();
 	}

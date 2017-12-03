@@ -15,18 +15,12 @@ public class Hangar : Room {
 
 	// Use this for initialization
 	void Start () {
-		
+		spawnDrone ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-	}
-
-	void loadDrone() {
-		//drag & drop des battery sur le drone
-		//Increase de loadedBattery
-		//Decrease de generator.NbBattery
 	}
 
 	void sendDrone() {
@@ -37,7 +31,7 @@ public class Hangar : Room {
 
 	public void spawnDrone(){
 		GameObject droneSpawned = Instantiate (dronePrefab, posDrone.position, posDrone.rotation);
-		Drone d = droneSpawned.GetComponent<Drone> ();
+		d = droneSpawned.GetComponent<Drone> ();
 		d.hangar = this;
 		d.boat = boat;
 	}
@@ -53,11 +47,11 @@ public class Hangar : Room {
 		boat.ElectricityRequest += d.LoadedBattery * 0.1f;
 	}
 
-	public void SetupHangar() {
+	public override void Setup() {
+		
 	}
 
-	public void StopHangar() {
+	public override void Reset() {
+		d.StopDrone ();
 	}
-
-
 }
