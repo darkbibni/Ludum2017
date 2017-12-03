@@ -5,17 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Interactable))]
 
 public class Battery : MonoBehaviour {
+	
 	public Hangar hangar;
 	public Generator generator;
-
-
-
-	void Awake() {
-		
-	}
-
-	void OnMouseDrag() {
-	}
 
 	void OnMouseReleased(GameObject target) {
 
@@ -33,9 +25,9 @@ public class Battery : MonoBehaviour {
 		}
 	}
 
-	// Update is called once per frameS
-	void Update () {
+	void OnMouseReleased(Vector3 dropPosition) {
 
+		// Do nothing !
 	}
 
 }

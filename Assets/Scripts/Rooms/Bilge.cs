@@ -8,13 +8,15 @@ public class Bilge : Room {
 
 	public GameObject water;
 
-  public int NbHole {
+ 	public int NbHole {
 		get { return nbHole; }
 		set {
 			nbHole = Mathf.Max(value, 0); // Hole can't be negative
 		}
 	}
+
 	private int nbHole=0;
+	private List<GameObject> holes = new List<GameObject> ();
 
 	private Vector3 initialWaterHeight;
 
@@ -47,11 +49,22 @@ public class Bilge : Room {
 		boat.Submersion += nbHole * 0.01f;
 	}
 
-	public void SetupBilge() {
+	public override void Setup() {
 		nbHole = 0;
 	}
 
-	public void StopBilge() {
+	public override void Reset() {
 		CancelInvoke ("IncreaseSubmersion");
+		// TODO clean hole !!!
+
+		foreach (GameObject g in holes) {
+			Destroy (g);
+		}
+
+		holes.Clear ();
+	}
+
+	public void AddHole(GameObject hole) {
+		holes.Add (hole);
 	}
 }

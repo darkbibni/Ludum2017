@@ -23,12 +23,6 @@ public class Hangar : Room {
 		
 	}
 
-	void loadDrone() {
-		//drag & drop des battery sur le drone
-		//Increase de loadedBattery
-		//Decrease de generator.NbBattery
-	}
-
 	void sendDrone() {
 		generator.NbBattery = generator.NbBattery - 1; //remplacer 1 par nb de batteries chargées
 		//Delay 5sec puis call IncreaseElecricityRequest et boat.score=+100
@@ -53,11 +47,11 @@ public class Hangar : Room {
 		boat.ElectricityRequest += d.LoadedBattery * 0.1f;
 	}
 
-	public void SetupHangar() {
+	public override void Setup() {
+		
 	}
 
-	public void StopHangar() {
+	public override void Reset() {
+		d.StopDrone ();
 	}
-
-
 }

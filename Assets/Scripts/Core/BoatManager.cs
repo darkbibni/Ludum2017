@@ -17,6 +17,14 @@ public class BoatManager : MonoBehaviour {
 	public Generator generator;
 	public Bilge bilge;
 	public Hangar hangar;
+	public Watch watch;
+
+	public AudioClip[] alertVoices;
+	private bool alert;
+
+	public float alertTime = 0.15f;
+
+	private bool sendRafales;
 
 	public float Submersion {
 		get { return submersion; }
@@ -69,9 +77,9 @@ public class BoatManager : MonoBehaviour {
 		ElectricityRequest = 1.0f;
 		Submersion = 0.0f;
 		Score = 0;
-		bilge.SetupBilge ();
-		generator.SetupGenerator ();
-		hangar.SetupHangar ();
+		bilge.Setup ();
+		generator.Setup ();
+		hangar.Setup ();
 
 		InvokeRepeating ("IncreaseScore", 0.0f, scoreInterval);
 		InvokeRepeating ("DeacreaseElectricityRequest", 0.0f, requestInterval);
@@ -103,18 +111,46 @@ public class BoatManager : MonoBehaviour {
 			StopBoat ();
 		}
 			
-		//if (electricityRequest==0.1)
-			//Call SendTheRafales
+		if (!alert && electricityRequest <= alertTime) {
+			alert = true;
+
+			// Alert for the Rafales !
+			int randVoice = Random.Range (0, alertVoices.Length);
+			AudioManager.singleton.PlayVoice (alertVoices [randVoice]);
+
+			AudioManager.singleton.PlayBgm (AudioManager.singleton.bgmInGameStressfull);
+		}
+
+		if (alert && electricityRequest > alertTime) {
+			alert = false;
+
+			AudioManager.singleton.PlayBgm (AudioManager.singleton.bgmInGame);
+		}
+
+		if (!sendRafales && electricityRequest <= 0.1f) {
+			sendRafales = true;
+
+			TriggerRafalesEvent ();
+		}
+
+		if (sendRafales && electricityRequest > 0.1f) {
+			sendRafales = false;
+		}
+	}
+
+	void TriggerRafalesEvent() {
+
+		// TODO EVENT !!!
 	}
 
 	// Trigger when gameover.
 	void StopBoat() {
-
 		CancelInvoke ("DeacreaseElectricityRequest");
 		CancelInvoke ("IncreaseScore");
-		bilge.StopBilge ();
-		generator.StopGenerator ();
-		hangar.StopHangar ();
+		bilge.Reset ();
+		generator.Reset ();
+		hangar.Reset ();
+		watch.Reset ();
 	}
 
 	void DeacreaseElectricityRequest() {

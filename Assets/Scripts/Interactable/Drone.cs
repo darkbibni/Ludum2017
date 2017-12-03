@@ -10,6 +10,7 @@ public class Drone : MonoBehaviour {
 	public Hangar hangar;
 
 	public AudioClip droneTakeover;
+	public AudioClip droneSupplyValidate;
 
 	private int loadedBattery=0;
 
@@ -24,10 +25,8 @@ public class Drone : MonoBehaviour {
 
 	private bool move;
 
-	void OnMousePressed() {
-		Debug.Log ("Send drone");
+	void OnMousePressed(int index) {
 		move = true;
-
 		AudioManager.singleton.PlaySfx (droneTakeover);
 	}
 
@@ -46,14 +45,15 @@ public class Drone : MonoBehaviour {
 	}
 
 	public void StopDrone() {
-		Destroy (gameObject);
-	}
-
-	void OnTriggerEnter2D(Collider2D Trigger){
-		//ValidateDrone ();
+		// Destroy (gameObject);
+		// TODO Debug that
 	}
 
 	void ValidateDrone() {
+		// TODO try to send the drone.
+
+		AudioManager.singleton.PlaySfx (droneSupplyValidate);
+
 		hangar.IncreaseElectricityRequest ();
 		boat.Score += 100 * loadedBattery;
 

@@ -23,15 +23,16 @@ public class MouseManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		HandleMousePressed ();
+		HandleMousePressed (0);
+		HandleMousePressed (1);
 
 		HandleMouseReleased ();
 
 		HandleMouseDrag ();
 	}
 
-	void HandleMousePressed() {
-		if (Input.GetMouseButtonDown (0)) {
+	void HandleMousePressed(int index) {
+		if (Input.GetMouseButtonDown (index)) {
 
 			currentGameObject = GetObject (allObjectsLayer);
 
@@ -40,9 +41,12 @@ public class MouseManager : MonoBehaviour {
 				interactable = currentGameObject.GetComponent<Interactable> ();
 
 				if (interactable) {
+					
 					if (interactable.interactionType == InteractionType.CLICKABLE) {
-						interactable.MousePressed ();
-					} else if (interactable.interactionType == InteractionType.DRAGABLE) {
+						interactable.MousePressed (index);
+					}
+
+					else if (interactable.interactionType == InteractionType.DRAGABLE) {
 						mousePressed = true;
 
 						Debug.Log ("Start drag");

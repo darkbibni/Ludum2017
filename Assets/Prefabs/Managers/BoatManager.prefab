@@ -33,7 +33,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1676950340906042}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -56,7 +56,14 @@ MonoBehaviour:
   waterValue: {fileID: 0}
   scoreValue: {fileID: 0}
   scoreInterval: 1
-  requestInterval: 1
+  requestInterval: 0.5
   generator: {fileID: 0}
   bilge: {fileID: 0}
   hangar: {fileID: 0}
+  watch: {fileID: 0}
+  alertVoices:
+  - {fileID: 8300000, guid: 7531db8dc464d314b84b490aca547598, type: 3}
+  - {fileID: 8300000, guid: e5c3ec85b700b1b468867ecd684dbb36, type: 3}
+  - {fileID: 8300000, guid: 4292a9f1b219d72428f151577750f017, type: 3}
+  - {fileID: 8300000, guid: d16b40954cd284e488065f4000bdd0a4, type: 3}
+  alertTime: 0.15
