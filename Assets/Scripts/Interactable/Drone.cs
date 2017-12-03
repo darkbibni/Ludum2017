@@ -9,6 +9,15 @@ public class Drone : MonoBehaviour {
 	public BoatManager boat;
 	public Hangar hangar;
 
+	private int loadedBattery=0;
+
+	public int LoadedBattery {
+		get { return loadedBattery; }
+		set {
+			loadedBattery = value;
+		}
+	}
+
 	public float speed = 2.0f;
 
 	private bool move;
@@ -23,5 +32,19 @@ public class Drone : MonoBehaviour {
 		if (move) {
 			transform.Translate (new Vector2 (0.0f, Time.deltaTime * speed));
 		}
+	}
+
+	public void SetupDrone() {
+		loadedBattery=0;
+	}
+	public void StopDrone() {
+		Destroy (gameObject);
+	}
+
+	void OnTriggerEnter2D(Collider2D Trigger){
+		Destroy (gameObject);
+		hangar.IncreaseElectricityRequest ();
+		hangar.spawnDrone ();
+		boat.Score += 100;
 	}
 }
