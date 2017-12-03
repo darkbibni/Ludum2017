@@ -10,8 +10,8 @@ public class Bucket : MonoBehaviour {
 	public Sprite bucketFull;
 	public Sprite bucketEmpty;
 
-	public AudioSource takeWater;
-	public AudioSource dropWater;
+	public AudioClip takeWater;
+	public AudioClip dropWater;
 
 	private bool fullOfWater;
 	private bool isDragging;
@@ -70,8 +70,8 @@ public class Bucket : MonoBehaviour {
 		bilge.EjectWater ();
 		fullOfWater = true;
 
-		if(takeWater)
-			takeWater.Play ();
+		if (takeWater)
+			AudioManager.singleton.PlaySfx (takeWater);
 	}
 
 	void DropWaterFromBucket() {
@@ -79,7 +79,7 @@ public class Bucket : MonoBehaviour {
 		fullOfWater = false;
 
 		if(dropWater)
-			dropWater.Play ();
+			AudioManager.singleton.PlaySfx (dropWater);
 	}
 
 	#endregion

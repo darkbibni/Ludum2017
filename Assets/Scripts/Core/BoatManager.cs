@@ -92,18 +92,24 @@ public class BoatManager : MonoBehaviour {
 	}
 
 	void CheckSubmersionEvent() { // check value of submersion trigger event
-		if (submersion==1)
+		if (submersion == 1) {
 			StopBoat ();
+			GameManager.singleton.GameOver (GameoverType.SINKING);
+		}
 	}
 
 	void CheckRadioactivityEvent() { // check value of submersion trigger event
-		if (radioactivity==1)
+		if (radioactivity == 1) {
 			StopBoat ();
+			GameManager.singleton.GameOver(GameoverType.OVERHEAT);
+		}
 	}
 
 	void CheckElectricityRequestEvent() { // check value of submersion trigger event
 
 		if (electricityRequest <= 0f) {
+
+			GameManager.singleton.GameOver(GameoverType.BOMBING);
 			StopBoat ();
 		}
 			
@@ -119,7 +125,6 @@ public class BoatManager : MonoBehaviour {
 		bilge.StopBilge ();
 		generator.StopGenerator ();
 		hangar.StopHangar ();
-		GameManager.singleton.GameOver();
 	}
 
 	void DeacreaseElectricityRequest() {

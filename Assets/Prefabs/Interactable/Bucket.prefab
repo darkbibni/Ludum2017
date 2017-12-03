@@ -143,10 +143,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bilge: {fileID: 0}
   bucketSprite: {fileID: 212848913862396760}
-  bucketFull: {fileID: 0}
-  bucketEmpty: {fileID: 0}
-  takeWater: {fileID: 0}
-  dropWater: {fileID: 0}
+  bucketFull: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  bucketEmpty: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  takeWater: {fileID: 8300000, guid: c6190e8bc76c4b44abd7ce6e7eee8ad0, type: 3}
+  dropWater: {fileID: 8300000, guid: 57a719686f3b47f4cba300d1d8ec1f1e, type: 3}
 --- !u!212 &212848913862396760
 SpriteRenderer:
   m_ObjectHideFlags: 1
