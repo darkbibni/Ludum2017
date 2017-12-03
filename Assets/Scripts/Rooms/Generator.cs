@@ -5,6 +5,7 @@ using UnityEngine;
 public class Generator : Room {
 
 	public BoatManager boat;
+	public Hangar hangar;
 
 	public int NbBattery{
 		get { return nbBattery; }
@@ -29,7 +30,14 @@ public class Generator : Room {
 
 	IEnumerator IncreaseNbBattery() {
 		isWaiting = true;
-		nbBattery += 1;
+
+		Debug.Log ("Spawn battery");
+
+		if (nbBattery < 5) {
+			nbBattery++;
+			hangar.spawnBattery();
+		}
+
 		yield return new WaitForSeconds (timeToWait);
 		isWaiting = false;
 	}

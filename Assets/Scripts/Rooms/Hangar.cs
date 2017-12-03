@@ -6,8 +6,12 @@ public class Hangar : Room {
 
 	public BoatManager boat;
 	public Generator generator;
+	public Drone d;
 
-	private int loadedBattery=0;
+	public Transform posDrone;
+	public Transform posBattery;
+	public GameObject batteryPrefab;
+	public GameObject dronePrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -25,18 +29,30 @@ public class Hangar : Room {
 		//Decrease de generator.NbBattery
 	}
 
-	void SendDrone() {
+	void sendDrone() {
 		generator.NbBattery = generator.NbBattery - 1; //remplacer 1 par nb de batteries chargées
 		//Delay 5sec puis call IncreaseElecricityRequest et boat.score=+100
 
 	}
 
-	void IncreaseElectricityRequest() {
-		boat.ElectricityRequest = boat.ElectricityRequest + 0.2f;
+	public void spawnDrone(){
+		GameObject droneSpawned = Instantiate (dronePrefab, posDrone.position, posDrone.rotation);
+		Drone d = droneSpawned.GetComponent<Drone> ();
+		d.hangar = this;
+	}
+
+	public void spawnBattery(){
+		GameObject batterySpawned = Instantiate (batteryPrefab, posBattery.position, posBattery.rotation);
+		Battery b = batterySpawned.GetComponent<Battery> ();
+		b.generator = generator;
+		b.hangar = this;
+	}
+
+	public void IncreaseElectricityRequest() {
+		boat.ElectricityRequest += d.LoadedBattery * 0.1f;
 	}
 
 	public void SetupHangar() {
-		loadedBattery=0;
 	}
 
 	public void StopHangar() {
