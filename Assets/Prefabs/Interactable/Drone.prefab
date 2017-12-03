@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boat: {fileID: 0}
   hangar: {fileID: 0}
+  droneTakeover: {fileID: 8300000, guid: 224bf0fb60d8f6548a1946c9655c17b4, type: 3}
   speed: 2
 --- !u!212 &212645338763155062
 SpriteRenderer:
