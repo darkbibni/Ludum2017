@@ -7,7 +7,6 @@ public class Generator : Room {
 	public BoatManager boat;
 	public Hangar hangar;
 	public Valve valve;
-	public Drone drone;
 
 	public int NbBattery{
 		get { return nbBattery; }
@@ -34,7 +33,7 @@ public class Generator : Room {
 
 		Debug.Log ("Spawn battery");
 
-		if ((nbBattery + drone.LoadedBattery) < 5) {
+		if ((nbBattery) < 5) {
 			nbBattery++;
 			hangar.spawnBattery();
 		}

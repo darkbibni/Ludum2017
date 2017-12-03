@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mass : MonoBehaviour {
+public class Mace : MonoBehaviour {
 
 	public Bilge bilge;
 	public GameObject holePrefab;

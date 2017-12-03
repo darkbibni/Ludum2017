@@ -63,7 +63,7 @@ public class BoatManager : MonoBehaviour {
 		SetupBoat ();
 	}
 
-	void SetupBoat() {
+	public void SetupBoat() {
 
 		Radioactivity = 0.0f;
 		ElectricityRequest = 1.0f;
@@ -75,16 +75,6 @@ public class BoatManager : MonoBehaviour {
 
 		InvokeRepeating ("IncreaseScore", 0.0f, scoreInterval);
 		InvokeRepeating ("DeacreaseElectricityRequest", 0.0f, requestInterval);
-	}
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
 	void IncreaseScore(){
