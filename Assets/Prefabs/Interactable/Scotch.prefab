@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50269449700825628}
   - component: {fileID: 114392177382591016}
   m_Layer: 8
-  m_Name: Scotch 1
+  m_Name: Scotch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
