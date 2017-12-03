@@ -11,7 +11,7 @@ public class BoatManager : MonoBehaviour {
 	public Text scoreValue;
 
 	[Header("Intervalles")]
-	public float scoreInterval = 1.0f;
+	public float scoreInterval = 10.0f;
 	public float requestInterval = 1.0f;
 
 	public Generator generator;
@@ -75,10 +75,23 @@ public class BoatManager : MonoBehaviour {
 
 		InvokeRepeating ("IncreaseScore", 0.0f, scoreInterval);
 		InvokeRepeating ("DeacreaseElectricityRequest", 0.0f, requestInterval);
+		InvokeRepeating ("requestUpgrade", 0.0f, 60.0f);
 	}
 
 	void IncreaseScore(){
 		Score += 10;
+	}
+
+	void requestUpgrade() {
+		Debug.Log ("request upgrade");
+		requestInterval *=0.80f;
+		CancelInvoke ("DeacreaseElectricityRequest");
+		InvokeRepeating ("DeacreaseElectricityRequest", 0.0f, requestInterval);
+	}
+
+	void DeacreaseElectricityRequest() {
+		Debug.Log ("Elec requ decrease");
+		ElectricityRequest -= 0.01f;
 	}
 
 	void CheckSubmersionEvent() { // check value of submersion trigger event
@@ -117,8 +130,6 @@ public class BoatManager : MonoBehaviour {
 		hangar.StopHangar ();
 	}
 
-	void DeacreaseElectricityRequest() {
-		ElectricityRequest -= 0.01f;
-	}
+
 
 }
