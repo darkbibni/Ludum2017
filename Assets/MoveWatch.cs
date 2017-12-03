@@ -19,15 +19,12 @@ public class MoveWatch : MonoBehaviour {
 		}
 
 		if (mousePressed) {
+
 			if(mouseOrigin != Vector3.zero) {
 				Vector3 dir = (mouseOrigin - Input.mousePosition).normalized;
 
-				Debug.Log (dir.x);
+				Debug.Log (dir);
 			}
 		}
-	}
-
-	void OnmouseStay() {
-
 	}
 }
