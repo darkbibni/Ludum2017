@@ -33,7 +33,8 @@ public class Drone : MonoBehaviour {
 
 	void Update() {
 		if (move) {
-			transform.Translate (new Vector2 (0.0f, Time.deltaTime * speed));
+			transform.Translate ( new Vector2 (0.0f, Time.deltaTime*speed));
+			transform.localScale *= 0.95f;
 		}
 	}
 
@@ -48,6 +49,6 @@ public class Drone : MonoBehaviour {
 		Destroy (gameObject);
 		hangar.IncreaseElectricityRequest ();
 		hangar.spawnDrone ();
-		boat.Score += 100;
+		boat.Score += 100 * loadedBattery;
 	}
 }
