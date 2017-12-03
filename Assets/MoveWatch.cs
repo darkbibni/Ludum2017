@@ -7,7 +7,11 @@ public class MoveWatch : MonoBehaviour {
 	private bool mousePressed;
 	private Vector3 mouseOrigin;
 
-	void Update() {
+	void OnMouseOver() {
+
+		Debug.Log ("Over");
+
+		/*
 		if (Input.GetMouseButtonDown (0)) {
 			mousePressed = true;
 
@@ -26,5 +30,8 @@ public class MoveWatch : MonoBehaviour {
 				Debug.Log (dir);
 			}
 		}
+		*/
 	}
+
+
 }
