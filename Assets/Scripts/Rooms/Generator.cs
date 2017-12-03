@@ -19,12 +19,12 @@ public class Generator : Room {
 
 	// Use this for initialization
 	void Start () {
-		InvokeRepeating ("IncreaseRadioactivity", 0.0f, 1.0f);
+		InvokeRepeating ("IncDecRadioactivity", 0.0f, 1.0f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (!isWaiting)
+		if (!isWaiting && boat.Radioactivity > 0)
 			StartCoroutine (IncreaseNbBattery());
 	}
 
@@ -43,6 +43,11 @@ public class Generator : Room {
 	}
 
 	//après changement de generatorPower -> changer timeToWait (de 5s à 0.5s) 
+	void IncDecRadioactivity() {
+		IncreaseRadioactivity ();
+		DecreaseRadioactivity ();
+		timeToWait=(1-boat.Radioactivity)*5;
+	}
 
 	void IncreaseRadioactivity() {
 		if (valve.NbTour == 0)
@@ -55,7 +60,7 @@ public class Generator : Room {
 		if (boat.Submersion == 0)
 			return;
 
-		boat.Radioactivity = boat.Radioactivity - 0.2f; //EmptyTheBucket
+		boat.Radioactivity -= boat.Submersion*0.2f; //EmptyTheBucket
 	}
 
 	public void SetupGenerator() {

@@ -20,7 +20,7 @@ public class Drone : MonoBehaviour {
 		}
 	}
 
-	public float speed = 2.0f;
+	public float speed = 5.0f;
 
 	private bool move;
 
@@ -35,20 +35,30 @@ public class Drone : MonoBehaviour {
 		if (move) {
 			transform.Translate (new Vector2 (0.0f, Time.deltaTime * speed));
 			transform.localScale *= 0.95f;
+
+			if (transform.localScale.x <= 0.05f)
+				ValidateDrone ();
 		}
 	}
 
 	public void SetupDrone() {
 		loadedBattery=0;
 	}
+
 	public void StopDrone() {
 		Destroy (gameObject);
 	}
 
 	void OnTriggerEnter2D(Collider2D Trigger){
-		Destroy (gameObject);
+		//ValidateDrone ();
+	}
+
+	void ValidateDrone() {
 		hangar.IncreaseElectricityRequest ();
-		hangar.spawnDrone ();
 		boat.Score += 100 * loadedBattery;
+
+		Destroy (gameObject);
+
+		hangar.spawnDrone ();
 	}
 }
