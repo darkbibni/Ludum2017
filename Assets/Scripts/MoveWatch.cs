@@ -29,9 +29,6 @@ public class MoveWatch : MonoBehaviour {
 				Vector3 dir = (mouseOrigin - Camera.main.ScreenToWorldPoint (Input.mousePosition)).normalized;
 
 				float dirRatio = Mathf.Round(dir.x);
-				Debug.Log (dirRatio);
-
-				Debug.Log (transform.position);
 
 				// Clamp
 				sea.transform.Translate (Vector2.right * dirRatio * speed * Time.deltaTime);
