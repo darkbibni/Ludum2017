@@ -11,7 +11,7 @@ public class Bilge : Room {
   public int NbHole {
 		get { return nbHole; }
 		set {
-			nbHole = value;
+			nbHole = Mathf.Max(value, 0); // Hole can't be negative
 		}
 	}
 	private int nbHole=0;
@@ -23,9 +23,6 @@ public class Bilge : Room {
 		initialWaterHeight = water.transform.localPosition;
 
 		InvokeRepeating ("IncreaseSubmersion", 0.0f, 1.0f);
-
-    // for debug !
-		nbHole = 1;
 	}
 
 	// Update is called once per frame
