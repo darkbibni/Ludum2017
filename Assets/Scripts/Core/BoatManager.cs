@@ -40,6 +40,8 @@ public class BoatManager : MonoBehaviour {
 		get { return radioactivity; }
 		set {
 			radioactivity = Mathf.Clamp (value, 0, 1);
+
+			radioactivityValue.color = Color.Lerp (Color.green, Color.red, radioactivity);
 			radioactivityValue.fillAmount = radioactivity;
 			CheckRadioactivityEvent ();
 		}
@@ -59,7 +61,7 @@ public class BoatManager : MonoBehaviour {
 		set {
 			score = value;
 
-			scoreValue.text = score.ToString();
+			scoreValue.text = "Score\n" + score.ToString();
 		}
 	}
 	private float submersion=0f;
