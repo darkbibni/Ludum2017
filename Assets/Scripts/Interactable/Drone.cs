@@ -33,7 +33,7 @@ public class Drone : MonoBehaviour {
 
 	void Update() {
 		if (move) {
-			transform.Translate ( new Vector2 (0.0f, Time.deltaTime*speed));
+			transform.Translate (new Vector2 (0.0f, Time.deltaTime * speed));
 			transform.localScale *= 0.95f;
 		}
 	}
