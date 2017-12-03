@@ -9,6 +9,8 @@ public class Drone : MonoBehaviour {
 	public BoatManager boat;
 	public Hangar hangar;
 
+	public AudioClip droneTakeover;
+
 	private int loadedBattery=0;
 
 	public int LoadedBattery {
@@ -26,6 +28,7 @@ public class Drone : MonoBehaviour {
 		Debug.Log ("Send drone");
 		move = true;
 
+		AudioManager.singleton.PlaySfx (droneTakeover);
 	}
 
 	void Update() {
@@ -46,6 +49,6 @@ public class Drone : MonoBehaviour {
 		Destroy (gameObject);
 		hangar.IncreaseElectricityRequest ();
 		hangar.spawnDrone ();
-		boat.Score += 100;
+		boat.Score += 100 * loadedBattery;
 	}
 }

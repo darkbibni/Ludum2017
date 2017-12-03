@@ -6,6 +6,8 @@ public class Generator : Room {
 
 	public BoatManager boat;
 	public Hangar hangar;
+	public Valve valve;
+	public Drone drone;
 
 	public int NbBattery{
 		get { return nbBattery; }
@@ -15,7 +17,6 @@ public class Generator : Room {
 	private bool isWaiting;
 	private float timeToWait=5f;
 	private int nbBattery=0;
-	private float generatorPower=0f;
 
 	// Use this for initialization
 	void Start () {
@@ -33,7 +34,7 @@ public class Generator : Room {
 
 		Debug.Log ("Spawn battery");
 
-		if (nbBattery < 5) {
+		if ((nbBattery + drone.LoadedBattery) < 5) {
 			nbBattery++;
 			hangar.spawnBattery();
 		}
@@ -45,10 +46,10 @@ public class Generator : Room {
 	//après changement de generatorPower -> changer timeToWait (de 5s à 0.5s) 
 
 	void IncreaseRadioactivity() {
-		if (generatorPower == 0)
+		if (valve.NbTour == 0)
 			return;
 
-		boat.Radioactivity += generatorPower * 0.01f;
+		boat.Radioactivity += valve.NbTour * 0.01f;
 	}
 
 	void DecreaseRadioactivity() {
@@ -61,8 +62,10 @@ public class Generator : Room {
 	public void SetupGenerator() {
 		timeToWait=5f;
 		nbBattery=0;
-		generatorPower=0f;
+		valve.NbTour=0;
 	}
+
+
 
 	public void StopGenerator() {
 		CancelInvoke ("IncreaseRadioactivity");
