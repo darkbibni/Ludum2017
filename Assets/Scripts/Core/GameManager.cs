@@ -57,7 +57,9 @@ public class GameManager : MonoBehaviour {
 			break;
 		}
 
+		audioMgr.StopBgm ();
 		audioMgr.PlaySfx(gameOverToPlay);
+
 
 		blackScreen.SetActive (true);
 		gameOverPanel.SetActive (true);

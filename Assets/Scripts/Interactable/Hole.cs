@@ -6,16 +6,17 @@ using UnityEngine;
 
 public class Hole : MonoBehaviour {
 
-	public BoatManager boat;
 	public Bilge bilge;
 
-	void OnMousePressed() {
-		Debug.Log ("Hole Created");
-
+	public void OnCreateHole() {
+		bilge.NbHole++;
 	}
 
-	// Update is called once per frame
-	void Update () {
+	void OnDestroy() {
+		OnRepareHole ();
+	}
 
+	private void OnRepareHole() {
+		bilge.NbHole--;
 	}
 }

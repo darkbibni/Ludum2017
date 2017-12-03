@@ -46,8 +46,10 @@ public class Bucket : MonoBehaviour {
 
 	void OnMouseReleased(GameObject target) {
 
-		if(target.name.Contains("Porthole")) {
-			DropWaterFromBucket ();
+		if (fullOfWater) {
+			if (target.name.Contains ("Porthole")) {
+				DropWaterFromBucket ();
+			}
 		}
 
 		isDragging = false;

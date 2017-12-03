@@ -22,6 +22,10 @@ public class AudioManager : MonoBehaviour {
 		musicSrc.Play ();
 	}
 
+	public void StopBgm() {
+		musicSrc.Stop ();
+	}
+
 	public void PlayBgs(AudioClip bgs) {
 		ambientSrc.clip = bgs;
 		ambientSrc.Play ();
