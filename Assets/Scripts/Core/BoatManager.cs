@@ -68,7 +68,7 @@ public class BoatManager : MonoBehaviour {
 	private int score=0;
 
 	void Awake() {
-		SetupBoat ();
+		
 	}
 
 	public void SetupBoat() {

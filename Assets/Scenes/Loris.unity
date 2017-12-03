@@ -191,6 +191,11 @@ Prefab:
       propertyPath: watch
       value: 
       objectReference: {fileID: 1324859768}
+    - target: {fileID: 114521327314159854, guid: 5088996afb827524eacda8a3676ab8f7,
+        type: 2}
+      propertyPath: requestInterval
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5088996afb827524eacda8a3676ab8f7, type: 2}
   m_IsPrefabParent: 0
