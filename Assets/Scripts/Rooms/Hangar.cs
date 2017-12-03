@@ -39,6 +39,7 @@ public class Hangar : Room {
 		GameObject droneSpawned = Instantiate (dronePrefab, posDrone.position, posDrone.rotation);
 		Drone d = droneSpawned.GetComponent<Drone> ();
 		d.hangar = this;
+		d.boat = boat;
 	}
 
 	public void spawnBattery(){
