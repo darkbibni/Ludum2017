@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject gameOverPanel;
 
 	public RoomManager roomMgr;
+	public BoatManager boatMgr;
 
 	[Header("Audio components")]
 	private AudioManager audioMgr;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour {
 		blackScreen.SetActive (false);
 		gameOverPanel.SetActive (false);
 
+		boatMgr.SetupBoat ();
 		roomMgr.MoveToRoom (-1);
 	}
 
