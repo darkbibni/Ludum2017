@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour {
 		finalScore.text = "Score final\n\n" + boatMgr.Score;
 
 		audioMgr.StopBgm ();
+		audioMgr.PlayBgs (null);
 		audioMgr.PlaySfx(gameOverToPlay);
 
 		gameOverPanel.SetActive (true);

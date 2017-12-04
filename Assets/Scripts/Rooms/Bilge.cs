@@ -55,7 +55,7 @@ public class Bilge : Room {
 	}
 
 	public override void Setup() {
-		nbHole = 0;
+		nbHole = 1;
 	}
 
 	public override void ResetRoom() {
