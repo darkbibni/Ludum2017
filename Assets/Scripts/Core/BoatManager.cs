@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class BoatManager : MonoBehaviour {
 
@@ -21,6 +22,11 @@ public class BoatManager : MonoBehaviour {
 
 	public AudioClip[] alertVoices;
 	private bool alert;
+
+	private bool reactorAlarm;
+	public AudioClip reactorAlarmSound;
+
+	public GameObject ui;
 
 	public float alertTime = 0.15f;
 
@@ -116,6 +122,15 @@ public class BoatManager : MonoBehaviour {
 			StopBoat ();
 			GameManager.singleton.GameOver(GameoverType.OVERHEAT);
 		}
+
+		if (!reactorAlarm && radioactivity > 0.75f) {
+			reactorAlarm = true;
+			AudioManager.singleton.PlaySfx (reactorAlarmSound);
+		}
+
+		if (reactorAlarm && radioactivity <= 0.7f) {
+			reactorAlarm = false;
+		}
 	}
 
 	void CheckElectricityRequestEvent() { // check value of submersion trigger event
@@ -169,6 +184,39 @@ public class BoatManager : MonoBehaviour {
 		watch.ResetRoom();
 	}
 
+	// Shake the sprite.
+    private IEnumerator ShakeSprite()
+    {
+        Vector3 shakingPos = Vector3.zero;
+
+        int shakingCount = 25;
+        float shakeDuration = 0.2f / shakingCount;
+
+		RectTransform rect = ui.GetComponent<RectTransform> ();
+
+		Vector3 originalPos = rect.position;
+
+        int i = 0;
+        while (i < shakingCount)
+        {
+			shakingPos = Random.insideUnitCircle * 25f;
+
+            // Change local position to simulate shake.
+			rect.position = originalPos + shakingPos;
+
+			Debug.Log ("SHAKe" + i);
+
+            yield return new WaitForSeconds(shakeDuration);
+            i++;
+        }
+
+        // Reset position of the sprite.
+		rect.position = originalPos;
+    }
 
 
+	[ContextMenu("Shake")]
+	public void SimulateShake() {
+		StartCoroutine (ShakeSprite ());
+	}
 }
