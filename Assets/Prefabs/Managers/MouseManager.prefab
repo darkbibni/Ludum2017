@@ -61,3 +61,5 @@ MonoBehaviour:
   targetableLayer:
     serializedVersion: 2
     m_Bits: 512
+  cursorTexture: {fileID: 2800000, guid: 5ca0e24a6d3bbfc49876aaec42c69a14, type: 3}
+  cursorMode: 0

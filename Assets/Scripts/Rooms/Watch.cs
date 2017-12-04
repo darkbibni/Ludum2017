@@ -12,7 +12,7 @@ public enum WatchEvent {
 
 public class Watch : Room {
 
-
+  [Header("Watch configuration")]
 	public BoatManager boat;
 	public GameObject[] spawnedElements;
 	public WatchEvent watchEvent;
@@ -72,7 +72,7 @@ public class Watch : Room {
 
 	}
 
-	public override void Reset() {
+	public override void ResetRoom() {
 
 	}
 }

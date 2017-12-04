@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class BoatManager : MonoBehaviour {
 
@@ -25,6 +26,11 @@ public class BoatManager : MonoBehaviour {
 
 	private bool alert;
 
+	private bool reactorAlarm;
+	public AudioClip reactorAlarmSound;
+
+	public GameObject ui;
+
 	public float alertTime = 0.15f;
 
 	private bool sendRafales;
@@ -43,6 +49,8 @@ public class BoatManager : MonoBehaviour {
 		get { return radioactivity; }
 		set {
 			radioactivity = Mathf.Clamp (value, 0, 1);
+
+			radioactivityValue.color = Color.Lerp (Color.green, Color.red, radioactivity);
 			radioactivityValue.fillAmount = radioactivity;
 			CheckRadioactivityEvent ();
 		}
@@ -62,7 +70,7 @@ public class BoatManager : MonoBehaviour {
 		set {
 			score = value;
 
-			scoreValue.text = score.ToString();
+			scoreValue.text = "Score\n" + score.ToString();
 		}
 	}
 	private float submersion=0f;
@@ -116,6 +124,15 @@ public class BoatManager : MonoBehaviour {
 			StopBoat ();
 			GameManager.singleton.GameOver(GameoverType.OVERHEAT);
 		}
+
+		if (!reactorAlarm && radioactivity > 0.75f) {
+			reactorAlarm = true;
+			AudioManager.singleton.PlaySfx (reactorAlarmSound);
+		}
+
+		if (reactorAlarm && radioactivity <= 0.7f) {
+			reactorAlarm = false;
+		}
 	}
 
 	void CheckElectricityRequestEvent() { // check value of submersion trigger event
@@ -165,12 +182,46 @@ public class BoatManager : MonoBehaviour {
 	void StopBoat() {
 		CancelInvoke ("DeacreaseElectricityRequest");
 		CancelInvoke ("IncreaseScore");
-		bilge.Reset ();
-		generator.Reset ();
-		hangar.Reset ();
-		watch.Reset ();
+
+		bilge.ResetRoom();
+		generator.ResetRoom();
+		hangar.ResetRoom();
+		watch.ResetRoom();
 	}
 
+	// Shake the sprite.
+    private IEnumerator ShakeSprite()
+    {
+        Vector3 shakingPos = Vector3.zero;
+
+        int shakingCount = 25;
+        float shakeDuration = 0.2f / shakingCount;
+
+		RectTransform rect = ui.GetComponent<RectTransform> ();
+
+		Vector3 originalPos = rect.position;
+
+        int i = 0;
+        while (i < shakingCount)
+        {
+			shakingPos = Random.insideUnitCircle * 25f;
+
+            // Change local position to simulate shake.
+			rect.position = originalPos + shakingPos;
+
+			Debug.Log ("SHAKe" + i);
+
+            yield return new WaitForSeconds(shakeDuration);
+            i++;
+        }
+
+        // Reset position of the sprite.
+		rect.position = originalPos;
+    }
 
 
+	[ContextMenu("Shake")]
+	public void SimulateShake() {
+		StartCoroutine (ShakeSprite ());
+	}
 }

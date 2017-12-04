@@ -56,7 +56,7 @@ MonoBehaviour:
   waterValue: {fileID: 0}
   scoreValue: {fileID: 0}
   scoreInterval: 1
-  requestInterval: 0.5
+  requestInterval: 1
   generator: {fileID: 0}
   bilge: {fileID: 0}
   hangar: {fileID: 0}
@@ -66,4 +66,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e5c3ec85b700b1b468867ecd684dbb36, type: 3}
   - {fileID: 8300000, guid: 4292a9f1b219d72428f151577750f017, type: 3}
   - {fileID: 8300000, guid: d16b40954cd284e488065f4000bdd0a4, type: 3}
+  reactorAlarmSound: {fileID: 8300000, guid: 2d3bca9548a44c948a4ec8bd04017cec, type: 3}
+  ui: {fileID: 0}
   alertTime: 0.15
