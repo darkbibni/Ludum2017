@@ -8,6 +8,10 @@ public class Bilge : Room {
 
 	public GameObject water;
 
+	public Transform[] posHoles;
+	public GameObject holePrefab;
+
+
  	public int NbHole {
 		get { return nbHole; }
 		set {
@@ -66,5 +70,18 @@ public class Bilge : Room {
 
 	public void AddHole(GameObject hole) {
 		holes.Add (hole);
+	}
+
+	public void rafalesBombing(){
+
+		int c = 0;
+		while (c < 3){
+			GameObject holeSpawned = Instantiate (holePrefab, posHoles[c].position, posHoles[c].rotation);
+			Hole h = holeSpawned.GetComponent<Hole> ();
+			h.bilge = this;
+			c++;
+		}
+
+		nbHole += 3;
 	}
 }

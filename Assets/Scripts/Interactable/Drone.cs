@@ -17,6 +17,7 @@ public class Drone : MonoBehaviour {
 
 	private int loadedBattery=0;
 	private int luck;
+	private int planeMalus;
 
 	public int LoadedBattery {
 		get { return loadedBattery; }
@@ -63,13 +64,16 @@ public class Drone : MonoBehaviour {
 
 		AudioManager.singleton.PlaySfx (droneSupplyValidate);
 
-		hangar.IncreaseElectricityRequest ();
+
 		if (watch.watchEvent == WatchEvent.PLANES) {
 			luck = Random.Range (0, 100);
-			if (luck>20)
+			planeMalus = 15 + loadedBattery * 5;
+			if (luck > planeMalus) {
+				hangar.IncreaseElectricityRequest ();
 				boat.Score += 100 * loadedBattery;
-			//else
-			//	AudioManager.singleton.PlaySfx (Explosion);
+			}
+			else
+				AudioManager.singleton.PlaySfx (Explosion);
 				
 
 		}

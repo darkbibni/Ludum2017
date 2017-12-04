@@ -21,8 +21,10 @@ public class Plane : MonoBehaviour {
 	void Update () {
 		if (planeIsHere == true) {
 			transform.Translate (new Vector2 (0.05f, 0));
-			//TODO if endofthesea -> destroy, planeIsHere=False;
-			//watch.watchEvent = WatchEvent.CLEAR_SKY;
 		}
+	}
+	void OnTriggerEnter2D(Collider2D collider){
+		planeIsHere = false;
+		watch.watchEvent = WatchEvent.CLEAR_SKY;
 	}
 }

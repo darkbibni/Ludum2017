@@ -6,6 +6,7 @@ public class Hangar : Room {
 
 	public BoatManager boat;
 	public Generator generator;
+	public Watch watch;
 	public Drone d;
 
 	public Transform posDrone;
@@ -34,6 +35,7 @@ public class Hangar : Room {
 		d = droneSpawned.GetComponent<Drone> ();
 		d.hangar = this;
 		d.boat = boat;
+		d.watch = watch;
 	}
 
 	public void spawnBattery(){

@@ -10,6 +10,7 @@ public class BoatManager : MonoBehaviour {
 	public Image waterValue;
 	public Text scoreValue;
 
+
 	[Header("Intervalles")]
 	public float scoreInterval = 10.0f;
 	public float requestInterval = 1.0f;
@@ -20,6 +21,8 @@ public class BoatManager : MonoBehaviour {
 	public Watch watch;
 
 	public AudioClip[] alertVoices;
+	public AudioClip Bombing;
+
 	private bool alert;
 
 	public float alertTime = 0.15f;
@@ -151,8 +154,11 @@ public class BoatManager : MonoBehaviour {
 	}
 
 	void TriggerRafalesEvent() {
+		//TODO screenshake
+		bilge.rafalesBombing();
+		AudioManager.singleton.PlaySfx (Bombing);
 
-		// TODO EVENT !!!
+
 	}
 
 	// Trigger when gameover.
