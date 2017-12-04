@@ -162,10 +162,11 @@ public class BoatManager : MonoBehaviour {
 	void StopBoat() {
 		CancelInvoke ("DeacreaseElectricityRequest");
 		CancelInvoke ("IncreaseScore");
-		bilge.Reset ();
-		generator.Reset ();
-		hangar.Reset ();
-		watch.Reset ();
+
+		bilge.ResetRoom();
+		generator.ResetRoom();
+		hangar.ResetRoom();
+		watch.ResetRoom();
 	}
 
 

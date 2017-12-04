@@ -29,11 +29,26 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	public void PlayBgs(AudioClip bgs) {
-		ambientSrc.clip = bgs;
-		ambientSrc.Play ();
+
+        // Stop ambient.
+        if (bgs == null)
+        {
+            ambientSrc.Stop();
+        }
+
+        else
+        {
+            ambientSrc.clip = bgs;
+            ambientSrc.Play();
+        }
 	}
 
-	public void PlaySfx(AudioClip sfx) {
+    public void ChangeBgsPitch(float newPitch)
+    {
+        ambientSrc.pitch = newPitch;
+    }
+
+    public void PlaySfx(AudioClip sfx) {
 		soundSrc.PlayOneShot(sfx);
 	}
 

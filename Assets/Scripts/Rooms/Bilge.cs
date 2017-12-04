@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bilge : Room {
-
-	public BoatManager boat;
-
+    
+    [Header("Generator configuration")]
 	public GameObject water;
 
  	public int NbHole {
 		get { return nbHole; }
 		set {
 			nbHole = Mathf.Max(value, 0); // Hole can't be negative
-		}
+
+            CheckFillWaterBgs();
+        }
 	}
 
 	private int nbHole=0;
@@ -53,7 +54,7 @@ public class Bilge : Room {
 		nbHole = 0;
 	}
 
-	public override void Reset() {
+	public override void ResetRoom() {
 		CancelInvoke ("IncreaseSubmersion");
 		// TODO clean hole !!!
 
@@ -64,7 +65,24 @@ public class Bilge : Room {
 		holes.Clear ();
 	}
 
-	public void AddHole(GameObject hole) {
+    public override void PlayRoomBgs()
+    {
+        CheckFillWaterBgs();
+    }
+
+    private void CheckFillWaterBgs()
+    {
+        if (nbHole > 0)
+        {
+            AudioManager.singleton.PlayBgs(roomBgs);
+        }
+        else
+        {
+            AudioManager.singleton.PlayBgs(null);
+        }
+    }
+
+    public void AddHole(GameObject hole) {
 		holes.Add (hole);
 	}
 }

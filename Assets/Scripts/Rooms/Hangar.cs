@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hangar : Room {
 
-	public BoatManager boat;
+    [Header("Hangar configuration")]
 	public Generator generator;
 	public Drone d;
 
@@ -51,7 +51,7 @@ public class Hangar : Room {
 		
 	}
 
-	public override void Reset() {
+	public override void ResetRoom() {
 		d.StopDrone ();
 	}
 }

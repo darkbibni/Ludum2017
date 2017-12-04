@@ -22,6 +22,8 @@ public class RoomManager : MonoBehaviour {
 				
 		newCamPos.z = cam.transform.position.z;
 
+        rooms[roomIndex].PlayRoomBgs();
+
 		cam.transform.position = newCamPos;
 	}
 }

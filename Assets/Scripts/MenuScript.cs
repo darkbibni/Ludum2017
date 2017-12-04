@@ -15,6 +15,7 @@ public class MenuScript : MonoBehaviour {
 	public Image[] blackBars;
 	public AudioClip startClip;
 	public AudioClip titleClip;
+    public AudioClip seaBgs;
 	public Image textBG;
 	public Sprite alternateMenu;
 	public Image splashArt;
@@ -46,6 +47,7 @@ public class MenuScript : MonoBehaviour {
 		textComponent = gameObject.GetComponentInChildren<Text> ();
 		textComponent.text = "";
 		AudioManager.singleton.PlayBgm (titleClip);
+        AudioManager.singleton.PlayBgs(seaBgs);
 	}
 
 	// Update is called once per frame

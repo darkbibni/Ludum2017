@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Generator : Room {
 
-	public BoatManager boat;
+    [Header("Generator configuration")]
 	public Hangar hangar;
 	public Valve valve;
 
@@ -66,11 +66,14 @@ public class Generator : Room {
 		nbBattery=0;
 		valve.NbTour=0;
 	}
-
-	public override void Reset() {
+    
+	public override void ResetRoom() {
 		CancelInvoke ("IncreaseRadioactivity");
 		StopAllCoroutines ();
 	}
 
-
+    public override void PlayRoomBgs()
+    {
+        AudioManager.singleton.PlayBgs(roomBgs);
+    }
 }

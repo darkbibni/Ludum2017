@@ -247,6 +247,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: a444bd9029a5ff34793b605d8e2b5f80,
         type: 3}
+    - target: {fileID: 114301143082473128, guid: 1088b377de46ad141a070c26e88d5989,
+        type: 2}
+      propertyPath: seaBgs
+      value: 
+      objectReference: {fileID: 8300000, guid: 3669f040fb9e53b488d555e9ed2fcfa6, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1088b377de46ad141a070c26e88d5989, type: 2}
   m_IsPrefabParent: 0
@@ -287,6 +292,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4079086823922588, guid: 2012809d298e6fc438afcdb8930391dd, type: 2}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82677450837088488, guid: 2012809d298e6fc438afcdb8930391dd,
+        type: 2}
+      propertyPath: Loop
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
