@@ -16,10 +16,18 @@ public class Valve : MonoBehaviour {
 		set { nbTour = value; }
 	}
 
-	void OnMousePressed() {
-		if (nbTour < 10) {
-			transform.Rotate (Vector3.forward, 45f);
-			nbTour++;
+	void OnMousePressed(int index) {
+		if (index==0){
+			if (nbTour < 10) {
+				transform.Rotate (Vector3.forward, 45f);
+				nbTour++;
+			}
+		}
+		if (index==1){
+			if (nbTour > 2) {
+				transform.Rotate (Vector3.forward, -45f);
+				nbTour--;
+			}
 		}
 	}
 
