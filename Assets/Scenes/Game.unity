@@ -1947,12 +1947,12 @@ Prefab:
         type: 2}
       propertyPath: valveUp
       value: 
-      objectReference: {fileID: 8300000, guid: 5075b9f4791528348b5edf4771340fcb, type: 3}
+      objectReference: {fileID: 8300000, guid: 08c5bcf12ed7f1a4a82ff3bdbefadc79, type: 3}
     - target: {fileID: 114583240338933002, guid: 1fe50279e3c5fa749bda9f14448c8374,
         type: 2}
       propertyPath: valveDown
       value: 
-      objectReference: {fileID: 8300000, guid: 08c5bcf12ed7f1a4a82ff3bdbefadc79, type: 3}
+      objectReference: {fileID: 8300000, guid: 5075b9f4791528348b5edf4771340fcb, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fe50279e3c5fa749bda9f14448c8374, type: 2}
   m_IsPrefabParent: 0

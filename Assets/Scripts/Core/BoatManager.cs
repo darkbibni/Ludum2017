@@ -115,6 +115,7 @@ public class BoatManager : MonoBehaviour {
 		if (submersion == 1) {
 			StopBoat ();
 			GameManager.singleton.GameOver (GameoverType.SINKING);
+			return;
 		}
 	}
 
@@ -122,6 +123,7 @@ public class BoatManager : MonoBehaviour {
 		if (radioactivity == 1) {
 			StopBoat ();
 			GameManager.singleton.GameOver(GameoverType.OVERHEAT);
+			return;
 		}
 
 		if (!reactorAlarm && radioactivity > 0.75f) {
@@ -140,6 +142,7 @@ public class BoatManager : MonoBehaviour {
 
 			GameManager.singleton.GameOver(GameoverType.BOMBING);
 			StopBoat ();
+			return;
 		}
 			
 		if (!alert && electricityRequest <= alertTime) {

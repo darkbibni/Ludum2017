@@ -36,21 +36,13 @@ public class AudioManager : MonoBehaviour {
 
 	public void PlayBgs(AudioClip bgs) {
 
-        // Stop ambient.
-        if (bgs == null)
-        {
-			if (ambientSrc) {
-				ambientSrc.Stop ();
-			}
-        }
+		ambientSrc.clip = bgs;
+		ambientSrc.Play ();
+	}
 
-        else
-        {
-			if (ambientSrc) {
-				ambientSrc.clip = bgs;
-				ambientSrc.Play ();
-			}
-        }
+	public void StopBgs() {
+		ambientSrc.Stop ();
+		ambientSrc.clip = null;
 	}
 
     public void ChangeBgsPitch(float newPitch)

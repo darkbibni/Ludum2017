@@ -39,7 +39,7 @@ public class Plane : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D collider) {
 		if (collider.tag == "SoundTrigger") {
-			AudioManager.singleton.PlayBgs (null);
+			AudioManager.singleton.StopBgs ();
 			return;
 		}
 	}

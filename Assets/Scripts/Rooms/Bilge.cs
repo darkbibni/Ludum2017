@@ -82,7 +82,7 @@ public class Bilge : Room {
         }
         else
         {
-            AudioManager.singleton.PlayBgs(null);
+			AudioManager.singleton.StopBgs();
         }
     }
 

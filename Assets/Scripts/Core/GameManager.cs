@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
 	private AudioManager audioMgr;
 	public AudioClip[] gameoverSfxs;
 
-	private bool isGameOver;
+	public bool isGameOver;
     private bool inCredits;
 
 	void Awake() {
@@ -78,6 +78,11 @@ public class GameManager : MonoBehaviour {
     }
 
 	public void GameOver(GameoverType gameoverType) {
+
+		if(isGameOver) {
+			return;
+		}
+
 		// Fade In
 		isGameOver = true;
 
@@ -101,10 +106,16 @@ public class GameManager : MonoBehaviour {
 		finalScore.text = "Score final\n\n" + boatMgr.Score;
 
 		audioMgr.StopBgm ();
-		audioMgr.PlayBgs (null);
+		audioMgr.StopBgs ();
 		audioMgr.PlaySfx(gameOverToPlay);
 
+		Invoke ("DestroyAUDIO", 5f);
+
 		gameOverPanel.SetActive (true);
+	}
+
+	private void DestroyAUDIO() {
+		Destroy (AudioManager.singleton.gameObject);
 	}
 
 	private void SingletonThis() {

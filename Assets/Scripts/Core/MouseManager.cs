@@ -29,7 +29,7 @@ public class MouseManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		GameObject objectHovered = GetObject (interactableLayer);
+		GameObject objectHovered = GetObject (allObjectsLayer);
 		if (objectHovered) {
 			Cursor.SetCursor (cursorTexture, Vector2.zero, cursorMode);
 		} else {
