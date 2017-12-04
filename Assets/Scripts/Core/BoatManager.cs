@@ -102,7 +102,6 @@ public class BoatManager : MonoBehaviour {
 	}
 
 	void requestUpgrade() {
-		Debug.Log ("request upgrade");
 		requestInterval *=0.80f;
 		CancelInvoke ("DeacreaseElectricityRequest");
 		InvokeRepeating ("DeacreaseElectricityRequest", 0.0f, requestInterval);
@@ -206,8 +205,6 @@ public class BoatManager : MonoBehaviour {
 
             // Change local position to simulate shake.
 			rect.position = originalPos + shakingPos;
-
-			Debug.Log ("SHAKe" + i);
 
             yield return new WaitForSeconds(shakeDuration);
             i++;

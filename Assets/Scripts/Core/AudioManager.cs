@@ -19,6 +19,12 @@ public class AudioManager : MonoBehaviour {
 		SingletonThis();
 	}
 
+	void Update() {
+		if (Input.GetButtonDown("Quit")) {
+			Application.Quit ();
+		}
+	}
+
 	public void PlayBgm(AudioClip bgm) {
 		musicSrc.clip = bgm;
 		musicSrc.Play ();
@@ -33,13 +39,17 @@ public class AudioManager : MonoBehaviour {
         // Stop ambient.
         if (bgs == null)
         {
-            ambientSrc.Stop();
+			if (ambientSrc) {
+				ambientSrc.Stop ();
+			}
         }
 
         else
         {
-            ambientSrc.clip = bgs;
-            ambientSrc.Play();
+			if (ambientSrc) {
+				ambientSrc.clip = bgs;
+				ambientSrc.Play ();
+			}
         }
 	}
 

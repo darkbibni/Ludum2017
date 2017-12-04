@@ -61,8 +61,6 @@ public class MouseManager : MonoBehaviour {
 
 					else if (interactable.interactionType == InteractionType.DRAGABLE) {
 						mousePressed = true;
-
-						Debug.Log ("Start drag");
 					}
 				}
 			}
@@ -76,7 +74,6 @@ public class MouseManager : MonoBehaviour {
 				if (interactable) {
 
 					if (interactable.interactionType == InteractionType.DRAGABLE) {
-						Debug.Log ("End drag");
 
 						mousePressed = false;
 
@@ -85,7 +82,7 @@ public class MouseManager : MonoBehaviour {
 						if (targetableObject) {
 							interactable.MouseReleased (targetableObject);
 
-							Debug.Log ("Drop object on " + targetableObject);
+							// Debug.Log ("Drop object on " + targetableObject);
 						}
 
 						else {
