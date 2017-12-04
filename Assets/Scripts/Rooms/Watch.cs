@@ -13,11 +13,16 @@ public enum WatchEvent {
 public class Watch : Room {
 
   [Header("Watch configuration")]
-	public BoatManager boat;
 	public GameObject[] spawnedElements;
 	public WatchEvent watchEvent;
 	public Transform posPlane;
 	public GameObject planePrefab;
+
+	public AudioClip planeBgs;
+
+	public Transform ennemiesTransform;
+
+	public GameObject soundTrigger;
 
 
 	private bool isWaitingEvent;
@@ -54,12 +59,10 @@ public class Watch : Room {
 	private void ManageEvent() {
 		// Spawn event elements.
 		spawnPlane();
-
-		// 
 	}
 
 	public void spawnPlane(){
-		GameObject planeSpawned = Instantiate (planePrefab, posPlane.position, posPlane.rotation);
+		GameObject planeSpawned = Instantiate (planePrefab, posPlane.position, posPlane.rotation, ennemiesTransform);
 		Plane p = planeSpawned.GetComponent<Plane> ();
 		p.watch = this;
 		p.PlaneIsHere = true;
@@ -74,5 +77,14 @@ public class Watch : Room {
 
 	public override void ResetRoom() {
 
+	}
+
+	public override void EnterRoom()
+	{
+		soundTrigger.SetActive (true);
+	}
+
+	public override void LeaveRoom() {
+		soundTrigger.SetActive (false);
 	}
 }

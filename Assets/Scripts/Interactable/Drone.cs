@@ -60,24 +60,42 @@ public class Drone : MonoBehaviour {
 	}
 
 	void ValidateDrone() {
-		// TODO try to send the drone.
-
-		AudioManager.singleton.PlaySfx (droneSupplyValidate);
-
-
+		
 		if (watch.watchEvent == WatchEvent.PLANES) {
+			
 			luck = Random.Range (0, 100);
-			planeMalus = 15 + loadedBattery * 5;
-			if (luck > planeMalus) {
-				hangar.IncreaseElectricityRequest ();
-				boat.Score += 100 * loadedBattery;
-			}
-			else
-				AudioManager.singleton.PlaySfx (Explosion);
-				
+			planeMalus = 25 + loadedBattery * 5;
 
+			if (luck > planeMalus) {
+				Success ();
+			} else {
+				AudioManager.singleton.PlaySfx (Explosion);
+			}
 		}
+
+		else if (watch.watchEvent == WatchEvent.SEAGELL) {
+			
+			luck = Random.Range (0, 100);
+			planeMalus = 5 + loadedBattery * 5;
+
+			if (luck > planeMalus) {
+				Success ();
+			} else {
+				AudioManager.singleton.PlaySfx (Explosion);
+			}
+		}
+
+		else {
+			Success ();
+		}
+
 		Destroy (gameObject);
 		hangar.spawnDrone ();
+	}
+
+	private void Success() {
+		hangar.IncreaseElectricityRequest ();
+		boat.Score += 100 * loadedBattery;
+		AudioManager.singleton.PlaySfx (droneSupplyValidate);
 	}
 }
