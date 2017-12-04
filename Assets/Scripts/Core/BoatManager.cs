@@ -98,7 +98,6 @@ public class BoatManager : MonoBehaviour {
 	}
 
 	void DeacreaseElectricityRequest() {
-		Debug.Log ("Elec requ decrease");
 		ElectricityRequest -= 0.01f;
 	}
 

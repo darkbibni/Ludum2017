@@ -8,12 +8,15 @@ public class Drone : MonoBehaviour {
 
 	public BoatManager boat;
 	public Hangar hangar;
+	public Watch watch;
 
 	public AudioClip droneTakeover;
 	public AudioClip droneSupplyValidate;
 	public AudioClip sendError;
+	public AudioClip Explosion;
 
 	private int loadedBattery=0;
+	private int luck;
 
 	public int LoadedBattery {
 		get { return loadedBattery; }
@@ -27,12 +30,13 @@ public class Drone : MonoBehaviour {
 	private bool move;
 
 	void OnMousePressed(int index) {
-
-		if (loadedBattery > 0) {
-			move = true;
-			AudioManager.singleton.PlaySfx (droneTakeover);
-		} else {
-			AudioManager.singleton.PlaySfx (sendError);
+		if (index == 0) {
+			if (loadedBattery > 0) {
+				move = true;
+				AudioManager.singleton.PlaySfx (droneTakeover);
+			} else {
+				AudioManager.singleton.PlaySfx (sendError);
+			}
 		}
 	}
 
@@ -60,10 +64,16 @@ public class Drone : MonoBehaviour {
 		AudioManager.singleton.PlaySfx (droneSupplyValidate);
 
 		hangar.IncreaseElectricityRequest ();
-		boat.Score += 100 * loadedBattery;
+		if (watch.watchEvent == WatchEvent.PLANES) {
+			luck = Random.Range (0, 100);
+			if (luck>20)
+				boat.Score += 100 * loadedBattery;
+			//else
+			//	AudioManager.singleton.PlaySfx (Explosion);
+				
 
+		}
 		Destroy (gameObject);
-
 		hangar.spawnDrone ();
 	}
 }
