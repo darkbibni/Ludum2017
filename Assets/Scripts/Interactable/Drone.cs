@@ -18,10 +18,12 @@ public class Drone : MonoBehaviour {
 	private int loadedBattery=0;
 	private int luck;
 	private int planeMalus;
+	public GameObject[] feedbackBatery;
 
 	public int LoadedBattery {
 		get { return loadedBattery; }
 		set {
+			feedbackBatery [loadedBattery].SetActive (true);
 			loadedBattery = value;
 		}
 	}
