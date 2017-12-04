@@ -94,7 +94,7 @@ public class BoatManager : MonoBehaviour {
 
 		InvokeRepeating ("IncreaseScore", 0.0f, scoreInterval);
 		InvokeRepeating ("DeacreaseElectricityRequest", 0.0f, requestInterval);
-		InvokeRepeating ("requestUpgrade", 0.0f, 60.0f);
+		InvokeRepeating ("requestUpgrade", 60.0f, 60.0f);
 	}
 
 	void IncreaseScore(){
@@ -171,11 +171,9 @@ public class BoatManager : MonoBehaviour {
 	}
 
 	void TriggerRafalesEvent() {
-		//TODO screenshake
 		bilge.rafalesBombing();
 		AudioManager.singleton.PlaySfx (Bombing);
-
-
+		StartCoroutine (ShakeSprite ());
 	}
 
 	// Trigger when gameover.

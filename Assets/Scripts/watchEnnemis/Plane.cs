@@ -23,8 +23,24 @@ public class Plane : MonoBehaviour {
 			transform.Translate (new Vector2 (0.05f, 0));
 		}
 	}
+
 	void OnTriggerEnter2D(Collider2D collider){
+		
+		if (collider.tag == "SoundTrigger") {
+
+			AudioManager.singleton.PlayBgs (watch.planeBgs);
+			return;
+		}
+
 		planeIsHere = false;
 		watch.watchEvent = WatchEvent.CLEAR_SKY;
+		Destroy (gameObject);
+	}
+
+	void OnTriggerExit2D(Collider2D collider) {
+		if (collider.tag == "SoundTrigger") {
+			AudioManager.singleton.PlayBgs (null);
+			return;
+		}
 	}
 }

@@ -69,7 +69,7 @@ public class Bilge : Room {
 		holes.Clear ();
 	}
 
-    public override void PlayRoomBgs()
+    public override void EnterRoom()
     {
         CheckFillWaterBgs();
     }

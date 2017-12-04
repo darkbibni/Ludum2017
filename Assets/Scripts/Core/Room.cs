@@ -20,7 +20,11 @@ public class Room : MonoBehaviour {
 
 	}
 
-    public virtual void PlayRoomBgs()
+	public virtual void LeaveRoom() {
+		
+	}
+
+    public virtual void EnterRoom()
     {
         AudioManager.singleton.PlayBgs(roomBgs);
     }

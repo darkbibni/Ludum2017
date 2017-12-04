@@ -72,7 +72,7 @@ public class Generator : Room {
 		StopAllCoroutines ();
 	}
 
-    public override void PlayRoomBgs()
+    public override void EnterRoom()
     {
         AudioManager.singleton.PlayBgs(roomBgs);
     }

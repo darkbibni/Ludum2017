@@ -8,7 +8,19 @@ public class RoomManager : MonoBehaviour {
 	public Room[] rooms;
 	public GameObject splashScreen;
 
+	private Room currentRoom;
+
 	public void MoveToRoom(int roomIndex) {
+
+		if (rooms [roomIndex] == currentRoom) {
+			return;
+		}
+
+		if (currentRoom) {
+			currentRoom.LeaveRoom ();
+		}
+
+		currentRoom = rooms [roomIndex];
 
 		Vector3 newCamPos;
 
@@ -17,13 +29,12 @@ public class RoomManager : MonoBehaviour {
 		}
 
 		else {
-			newCamPos = rooms [roomIndex].GetRoomPosition ();
+			newCamPos = currentRoom.GetRoomPosition ();
 		}
 				
 		newCamPos.z = cam.transform.position.z;
 
-        rooms[roomIndex].PlayRoomBgs();
-
+		currentRoom.EnterRoom();
 		cam.transform.position = newCamPos;
 	}
 }
