@@ -45,7 +45,7 @@ public class Watch : Room {
 	IEnumerator TriggerEvent() {
 		isWaitingEvent = true;
 
-		int nextEvent = Random.Range (20, 40);
+		int nextEvent = Random.Range (15, 30);
 
 		ManageEvent ();
 

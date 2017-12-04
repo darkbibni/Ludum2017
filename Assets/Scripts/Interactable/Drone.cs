@@ -58,7 +58,7 @@ public class Drone : MonoBehaviour {
 	}
 
 	public void StopDrone() {
-		Destroy (gameObject);
+		//Destroy (gameObject);
 	}
 
 	void ValidateDrone() {

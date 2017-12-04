@@ -9,6 +9,9 @@ public class Valve : MonoBehaviour {
 	public BoatManager boat;
 	public Generator generator;
 
+	public AudioClip valveUp;
+	public AudioClip valveDown;
+
 	private int nbTour;
 
 	public int NbTour{
@@ -21,12 +24,14 @@ public class Valve : MonoBehaviour {
 			if (nbTour < 10) {
 				transform.Rotate (Vector3.forward, 45f);
 				nbTour++;
+				AudioManager.singleton.PlaySfx (valveDown);
 			}
 		}
 		if (index==1){
 			if (nbTour > 2) {
 				transform.Rotate (Vector3.forward, -45f);
 				nbTour--;
+				AudioManager.singleton.PlaySfx (valveUp);
 			}
 		}
 	}

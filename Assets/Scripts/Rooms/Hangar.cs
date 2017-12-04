@@ -46,7 +46,7 @@ public class Hangar : Room {
 	}
 
 	public void IncreaseElectricityRequest() {
-		boat.ElectricityRequest += d.LoadedBattery * 0.1f;
+		boat.ElectricityRequest += d.LoadedBattery * 0.05f;
 	}
 
 	public override void Setup() {
