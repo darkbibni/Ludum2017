@@ -22,8 +22,9 @@ public class GameManager : MonoBehaviour {
     public GameObject gameOverPanel;
 	public Text explanation;
 	public Text finalScore;
+    public string[] explanations;
 
-    [Header("Gameover panel")]
+    [Header("Credits panel")]
     public GameObject creditsPanel;
 
     [Header("Audio components")]
@@ -85,15 +86,15 @@ public class GameManager : MonoBehaviour {
 		switch (gameoverType) {
 		case GameoverType.OVERHEAT:
 			gameOverToPlay = gameoverSfxs [0];
-			explanation.text = "Overheat text";
+			explanation.text = explanations[0].Replace("\\n", "\n");
 				break;
 		case GameoverType.SINKING:
 			gameOverToPlay = gameoverSfxs[1];
-			explanation.text = "Sinking  text";
+			explanation.text = explanations[1].Replace("\\n", "\n");
 				break;
 		case GameoverType.BOMBING:
 			gameOverToPlay = gameoverSfxs [2];
-			explanation.text = "Bombing text";
+			explanation.text = explanations[2].Replace("\\n", "\n");
 			break;
 		}
 

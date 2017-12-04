@@ -56,6 +56,10 @@ MonoBehaviour:
   gameOverPanel: {fileID: 0}
   explanation: {fileID: 0}
   finalScore: {fileID: 0}
+  explanations:
+  - The X.E.N.A. reactor overheated.\nNext time, cool it down with water.
+  - The reactor's cool.\nBut you sunk the ship.
+  - You did not provide enough energy to the motherland.\nTraitor!
   creditsPanel: {fileID: 0}
   gameoverSfxs:
   - {fileID: 8300000, guid: 2a968f56abd40374ab5edc05cf368f65, type: 3}

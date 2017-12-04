@@ -56,7 +56,7 @@ MonoBehaviour:
   waterValue: {fileID: 0}
   scoreValue: {fileID: 0}
   scoreInterval: 1
-  requestInterval: 0.5
+  requestInterval: 1
   generator: {fileID: 0}
   bilge: {fileID: 0}
   hangar: {fileID: 0}
