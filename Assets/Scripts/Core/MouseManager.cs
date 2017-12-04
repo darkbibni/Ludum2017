@@ -10,8 +10,14 @@ public class MouseManager : MonoBehaviour {
 	public LayerMask interactableLayer;
 	public LayerMask targetableLayer;
 
+	[Header("Cursor")]
+	public Texture2D cursorTexture;
+	public CursorMode cursorMode;
+
 	private GameObject currentGameObject;
 	private Interactable interactable;
+
+
 
 	private bool mousePressed;
 
@@ -22,6 +28,13 @@ public class MouseManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		GameObject objectHovered = GetObject (interactableLayer);
+		if (objectHovered) {
+			Cursor.SetCursor (cursorTexture, Vector2.zero, cursorMode);
+		} else {
+			Cursor.SetCursor (null, Vector2.zero, cursorMode);
+		}
 
 		HandleMousePressed (0);
 		HandleMousePressed (1);
