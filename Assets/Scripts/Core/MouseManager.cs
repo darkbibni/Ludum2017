@@ -61,8 +61,6 @@ public class MouseManager : MonoBehaviour {
 
 					else if (interactable.interactionType == InteractionType.DRAGABLE) {
 						mousePressed = true;
-
-						Debug.Log ("Start drag");
 					}
 				}
 			}
@@ -76,7 +74,6 @@ public class MouseManager : MonoBehaviour {
 				if (interactable) {
 
 					if (interactable.interactionType == InteractionType.DRAGABLE) {
-						Debug.Log ("End drag");
 
 						mousePressed = false;
 
@@ -85,7 +82,7 @@ public class MouseManager : MonoBehaviour {
 						if (targetableObject) {
 							interactable.MouseReleased (targetableObject);
 
-							Debug.Log ("Drop object on " + targetableObject);
+							// Debug.Log ("Drop object on " + targetableObject);
 						}
 
 						else {
@@ -107,7 +104,7 @@ public class MouseManager : MonoBehaviour {
 			float screenHeight = Screen.height;
 
 			// Out of screen.
-			if (mouseX < 0 || mouseX > 725 || mouseY < 0 || mouseY > screenHeight) {
+			if (mouseX < 0 || mouseX > (screenWidth - screenWidth*0.15f) || mouseY < 0 || mouseY > screenHeight) {
 
 			} else {
 				Vector3 newPos = cam.ScreenToWorldPoint(Input.mousePosition);

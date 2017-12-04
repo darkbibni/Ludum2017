@@ -24,8 +24,8 @@ public class MenuScript : MonoBehaviour {
 
 	private const float blinkEvery = 0.5f; //seconds
 	private const float initializedAfter = 1f; //seconds
-	private const float gameWidth = 854f;
-	private const float gameHeight = 480f;
+	private float gameWidth = 854f;
+	private float gameHeight = 480f;
 
 	//VARS
 	private float blinkTimer = 0f;
@@ -36,6 +36,11 @@ public class MenuScript : MonoBehaviour {
 	private int step = 0;
 	private string startText = "";
 	private bool finished = false;
+
+	void Awake() {
+		gameWidth = Screen.width;
+		gameHeight = Screen.height;
+	}
 
 	// Use this for initialization
 	void Start () {

@@ -38,9 +38,6 @@ public class Watch : Room {
 	void Update() {
 		if (!isWaitingEvent) {
 			StartCoroutine (TriggerEvent());
-			if (watchEvent==WatchEvent.PLANES)
-				Debug.Log ("planes here !");
-				
 		}
 
 	}
@@ -81,6 +78,8 @@ public class Watch : Room {
 
 	public override void EnterRoom()
 	{
+		base.EnterRoom ();
+
 		soundTrigger.SetActive (true);
 	}
 
