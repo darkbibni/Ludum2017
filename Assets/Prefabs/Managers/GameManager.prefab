@@ -51,10 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65bdf63a2a07dbe40813364f5a8f8bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackScreen: {fileID: 0}
-  gameOverPanel: {fileID: 0}
   roomMgr: {fileID: 0}
   boatMgr: {fileID: 0}
+  gameOverPanel: {fileID: 0}
+  explanation: {fileID: 0}
+  finalScore: {fileID: 0}
+  creditsPanel: {fileID: 0}
   gameoverSfxs:
   - {fileID: 8300000, guid: 2a968f56abd40374ab5edc05cf368f65, type: 3}
   - {fileID: 8300000, guid: eef7c90f8ac70d14db02b32f5ba28686, type: 3}

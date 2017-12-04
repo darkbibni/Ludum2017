@@ -14,18 +14,24 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager singleton;
 
-	public GameObject gameOverPanel;
+    [Header("Managers")]
+    public RoomManager roomMgr;
+    public BoatManager boatMgr;
+
+    [Header("Gameover panel")]
+    public GameObject gameOverPanel;
 	public Text explanation;
 	public Text finalScore;
 
-	public RoomManager roomMgr;
-	public BoatManager boatMgr;
+    [Header("Gameover panel")]
+    public GameObject creditsPanel;
 
-	[Header("Audio components")]
+    [Header("Audio components")]
 	private AudioManager audioMgr;
 	public AudioClip[] gameoverSfxs;
 
 	private bool isGameOver;
+    private bool inCredits;
 
 	void Awake() {
 		SingletonThis();
@@ -50,14 +56,25 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Update() {
-		if (isGameOver) {
+        
+		if (inCredits) {
 			if (Input.GetMouseButtonDown (0)) {
-				SceneManager.LoadScene (1);
-			} else if(Input.GetMouseButtonDown(1)) {
-				SceneManager.LoadScene (0);
+                creditsPanel.SetActive(false);
+                inCredits = false;
 			}
 		}
 	}
+
+    public void LoadScene(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
+
+    public void OpenCredits()
+    {
+        inCredits = true;
+        creditsPanel.SetActive(true);
+    }
 
 	public void GameOver(GameoverType gameoverType) {
 		// Fade In
